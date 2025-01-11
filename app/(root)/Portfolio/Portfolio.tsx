@@ -1,12 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  // DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import React, { useState } from "react";
@@ -20,6 +20,10 @@ const techIcons = {
   CSS: "/css.svg",
   Shadcn: "/shadcn.svg",
   Figma: "/figma.svg",
+};
+
+const getTechIcon = (tech: string): string => {
+  return techIcons[tech as keyof typeof techIcons] || "/fallback-icon.svg";
 };
 
 interface CardData {
@@ -45,10 +49,13 @@ const ProjectCard: React.FC<{
       <div className="w-full rounded-xl border bg-[rgb(13,13,13)] shadow-inner text-white overflow-hidden">
         <div className="">
           <div className="w-full aspect-video relative">
-            <img
+            <Image
               src={data.imageSrc}
               alt={data.title}
+              width={500} // Set a specific width
+              height={300} // Set a specific height
               className="w-full h-full object-cover"
+              loading="lazy"
             />
           </div>
           <div className="p-4">
@@ -56,11 +63,14 @@ const ProjectCard: React.FC<{
             <p className="text-gray-300 mb-4">{data.description}</p>
             <div className="flex flex-wrap gap-2 mb-4">
               {data.technologies.map((tech, index) => (
-                <img
+                <Image
                   key={index}
-                  // src={techIcons[tech]}
+                  src={getTechIcon(tech)}
                   alt={tech}
+                  width={24} // Set a width for the tech icons
+                  height={24} // Set a height for the tech icons
                   className="w-6 h-6"
+                  loading="lazy"
                 />
               ))}
             </div>
@@ -170,6 +180,10 @@ const Portfolio: React.FC = () => {
   ];
 
   const handleCardClick = (card: CardData) => {
+    if (!card.galleryImages || card.galleryImages.length === 0) {
+      console.error("No images available for this card.");
+      return;
+    }
     setSelectedCard(card);
     setIsModalOpen(true);
     setSelectedImage(card.galleryImages[0]); // Show the first image by default
@@ -187,18 +201,21 @@ const Portfolio: React.FC = () => {
         {selectedCard && (
           <DialogContent className="bg-[rgb(13,13,13)] text-white border rounded-xl sm:max-w-[400px] md:max-w-[700px] lg:px-4 px-2 py-4 max-h-[90vh] overflow-auto">
             <div className="flex flex-col gap-4">
-              {/* Left Side: Image Section */}
+              {/* Image Section */}
               <div className="flex flex-col w-full p-2 px-6">
                 {selectedImage && (
-                  <img
+                  <Image
                     src={selectedImage}
-                    alt={`Preview of ${selectedCard.title}`} // Meaningful alt text
+                    alt={`Preview of ${selectedCard.title}`}
+                    width={500} // Set width
+                    height={300} // Set height
                     className="w-full max-w-[300px] object-cover rounded-lg mx-auto"
+                    loading="lazy"
                   />
                 )}
               </div>
 
-              {/* Right Side: Features and Buttons */}
+              {/* Features and Buttons */}
               <div className="w-full p-2 flex flex-col">
                 <DialogHeader>
                   <DialogTitle className="text-lg font-bold">

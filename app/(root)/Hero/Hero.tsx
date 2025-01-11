@@ -20,10 +20,12 @@ const Hero: React.FC = () => {
                 Frontend Developer
               </h1>
               <p className="text-sm sm:text-base lg:text-lg font-extralight text-gray-300">
-                I'm a 23-year-old Frontend Developer. I have been programming
+                I&apos;m a 23-year-old Frontend Developer. I have been
+                programming
                 <br className="hidden sm:block" />
                 for more than 5 years. I create professional websites.
               </p>
+
               {/* Socials on larger screens */}
               <div className="lg:flex lg:justify-start lg:mt-4 mt-6">
                 <Socials />
