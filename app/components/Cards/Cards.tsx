@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image"; // Import Image component
 
 interface CardsProps {
   imageSrc: string;
@@ -19,10 +20,12 @@ const Cards: React.FC<CardsProps> = ({
     <div className="bg-black cursor-pointer rounded-xl overflow-hidden shadow-lg w-full max-w-[300px] sm:max-w-[350px] md:max-w-sm lg:max-w-md border transition-transform hover:scale-105">
       {/* Image */}
       <div className="relative h-48 sm:h-56">
-        <img
+        <Image
           src={imageSrc}
           alt={title}
           className="object-cover w-full h-full"
+          width={500} // Set a width for the image
+          height={300} // Set a height for the image
         />
       </div>
 

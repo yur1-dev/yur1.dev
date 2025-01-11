@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image"; // Import Image component
 
 const techStackData = [
   {
@@ -41,7 +42,6 @@ const techStackData = [
 const Techstack: React.FC = () => {
   return (
     <div className="max-w-[900px] h-[80vh] mx-auto flex flex-col justify-center relative px-4">
-      {" "}
       <div className="my-8 p-4 text-white">
         <h2 className="text-3xl font-semibold mb-4">Tech Stack</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -50,9 +50,9 @@ const Techstack: React.FC = () => {
               key={tech.alt}
               className="flex items-center border rounded-xl shadow-inner bg-[rgb(13,13,13)] p-2 sm:p-4"
             >
-              <img
+              <Image
                 src={tech.src}
-                alt={`${tech.name} logo`} // Add alt text here
+                alt={`${tech.name} logo`}
                 width={46}
                 height={46}
                 className="mr-2"

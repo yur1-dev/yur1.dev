@@ -186,7 +186,7 @@ const Portfolio: React.FC = () => {
     }
     setSelectedCard(card);
     setIsModalOpen(true);
-    setSelectedImage(card.galleryImages[0]); // Show the first image by default
+    setSelectedImage(card.galleryImages[0]);
   };
 
   const handleImageClick = (image: string) => {
