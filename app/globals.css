@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0d0d0d;
+  --foreground: #e0e0e0;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,4 +18,13 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+@layer utilities {
+  .grid-background {
+    background: linear-gradient(45deg, #ffffff 25%, transparent 25%) -50px 0,
+      linear-gradient(-45deg, #ffffff 25%, transparent 25%) -50px 0;
+    background-size: 100px 100px;
+  }
 }
