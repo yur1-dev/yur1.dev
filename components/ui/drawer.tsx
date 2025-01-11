@@ -5,6 +5,7 @@ import { Drawer as DrawerPrimitive } from "vaul";
 
 import { cn } from "@/lib/utils";
 
+// Drawer Component
 const Drawer = ({
   shouldScaleBackground = true,
   ...props
@@ -17,9 +18,7 @@ const Drawer = ({
 Drawer.displayName = "Drawer";
 
 const DrawerTrigger = DrawerPrimitive.Trigger;
-
 const DrawerPortal = DrawerPrimitive.Portal;
-
 const DrawerClose = DrawerPrimitive.Close;
 
 const DrawerOverlay = React.forwardRef<
@@ -104,8 +103,18 @@ const DrawerDescription = React.forwardRef<
 ));
 DrawerDescription.displayName = DrawerPrimitive.Description.displayName;
 
-// Optional: Placeholder for a Modal for large screens
-const LargeScreenModal = ({ children, isOpen, onClose }: any) => {
+// Modal for larger screens
+interface LargeScreenModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+}
+
+const LargeScreenModal: React.FC<LargeScreenModalProps> = ({
+  children,
+  isOpen,
+  onClose,
+}) => {
   if (!isOpen) return null;
   return (
     <div className="hidden sm:flex fixed inset-0 z-50 items-center justify-center bg-black/50">
@@ -113,6 +122,7 @@ const LargeScreenModal = ({ children, isOpen, onClose }: any) => {
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-500 hover:text-black"
+          aria-label="Close Modal"
         >
           ✖
         </button>
@@ -133,5 +143,5 @@ export {
   DrawerFooter,
   DrawerTitle,
   DrawerDescription,
-  LargeScreenModal, // Export the modal if needed
+  LargeScreenModal,
 };

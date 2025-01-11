@@ -211,6 +211,7 @@ const Portfolio: React.FC = () => {
                     height={300} // Set height
                     className="w-full max-w-[300px] object-cover rounded-lg mx-auto"
                     loading="lazy"
+                    onClick={() => handleImageClick(selectedImage)} // Add the onClick handler here
                   />
                 )}
               </div>
