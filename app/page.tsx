@@ -9,14 +9,16 @@ import Cgradients from "./components/Cgradients/Cgradients";
 
 export default function Home() {
   return (
-    <>
-      <Cgradients />
-      <Navbar />
-      <Hero />
-      <Experience />
-      <Techstack />
-      <Portfolio />
-      <Footer />
-    </>
+    <main className="relative w-full overflow-x-hidden">
+      <div className="w-full">
+        <Cgradients />
+        <Navbar />
+        <Hero />
+        <Experience />
+        <Techstack />
+        <Portfolio />
+        <Footer />
+      </div>
+    </main>
   );
 }

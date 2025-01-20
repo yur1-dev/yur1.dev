@@ -59,92 +59,94 @@ const Experience = () => {
   ];
 
   return (
-    <div className="max-w-[900px] mx-auto my-12 p-6 text-white rounded-lg shadow-lg">
-      <h1 className="text-4xl font-semibold mb-6 text-center sm:text-left">
-        Experience
-      </h1>
-      <Tabs defaultValue="work" className="w-full">
-        <TabsList className="flex justify-center bg-[#0D0D0D] space-x-4 mb-6">
-          <TabsTrigger
-            value="work"
-            className="py-1 px-6 sm:px-12 md:px-[11.5rem] text-white text-lg font-normal rounded-xl transition-colors duration-200"
-          >
-            Work
-          </TabsTrigger>
-          <TabsTrigger
-            value="studies"
-            className="py-1 px-6 sm:px-12 md:px-[11.5rem] text-white text-lg font-normal rounded-xl transition-colors duration-200"
-          >
-            Studies
-          </TabsTrigger>
-        </TabsList>
+    <div className="w-full px-4">
+      <div className="max-w-[900px] mx-auto my-12">
+        <h1 className="text-4xl font-semibold mb-6 text-center sm:text-left">
+          Experience
+        </h1>
+        <Tabs defaultValue="work" className="w-full">
+          <TabsList className="flex justify-center bg-[#0D0D0D] space-x-4 mb-6">
+            <TabsTrigger
+              value="work"
+              className="py-1 px-6 sm:px-12 md:px-[11.5rem] text-white text-lg font-normal rounded-xl transition-colors duration-200"
+            >
+              Work
+            </TabsTrigger>
+            <TabsTrigger
+              value="studies"
+              className="py-1 px-6 sm:px-12 md:px-[11.5rem] text-white text-lg font-normal rounded-xl transition-colors duration-200"
+            >
+              Studies
+            </TabsTrigger>
+          </TabsList>
 
-        {/* Work Tab */}
-        <TabsContent value="work">
-          <div className="space-y-4 border border-[#D9D9D9] p-4 rounded-xl">
-            {workData.map((item) => (
-              <div
-                key={item.id}
-                className="flex flex-col sm:flex-row items-center sm:items-start space-x-6 sm:space-x-8 p-6 rounded-lg shadow-md"
-              >
-                {/* Circular Image */}
-                <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-800 flex items-center justify-center">
-                  <Image
-                    src={item.image}
-                    alt={`Work Experience ${item.id}`}
-                    width={96}
-                    height={96}
-                    className="object-contain"
-                  />
+          {/* Work Tab */}
+          <TabsContent value="work">
+            <div className="space-y-4 border border-[#D9D9D9] p-4 rounded-xl">
+              {workData.map((item) => (
+                <div
+                  key={item.id}
+                  className="flex flex-col sm:flex-row items-center sm:items-start space-x-6 sm:space-x-8 p-6 rounded-lg shadow-md"
+                >
+                  {/* Circular Image */}
+                  <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-800 flex items-center justify-center">
+                    <Image
+                      src={item.image}
+                      alt={`Work Experience ${item.id}`}
+                      width={96}
+                      height={96}
+                      className="object-contain"
+                    />
+                  </div>
+
+                  {/* Work Details */}
+                  <div className="text-center sm:text-left">
+                    <p className="text-lg font-semibold">{item.duration}</p>
+                    <p className="text-xl font-semibold">{item.company}</p>
+                    <p className="text-lg">{item.role}</p>
+
+                    {/* Skills/Technologies */}
+                    <p className="text-sm text-gray-400 mt-2">{item.skills}</p>
+                  </div>
                 </div>
+              ))}
+            </div>
+          </TabsContent>
 
-                {/* Work Details */}
-                <div className="text-center sm:text-left">
-                  <p className="text-lg font-semibold">{item.duration}</p>
-                  <p className="text-xl font-semibold">{item.company}</p>
-                  <p className="text-lg">{item.role}</p>
+          {/* Studies Tab */}
+          <TabsContent value="studies">
+            <div className="space-y-4 border border-[#D9D9D9] p-4 rounded-xl">
+              {studiesData.map((item) => (
+                <div
+                  key={item.id}
+                  className="flex flex-col sm:flex-row items-center sm:items-start space-x-6 sm:space-x-8 p-6 rounded-lg shadow-md"
+                >
+                  {/* Circular Image */}
+                  <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-800 flex items-center justify-center">
+                    <Image
+                      src={item.image}
+                      alt={`Study Experience ${item.id}`}
+                      width={96}
+                      height={96}
+                      className="object-contain"
+                    />
+                  </div>
 
-                  {/* Skills/Technologies */}
-                  <p className="text-sm text-gray-400 mt-2">{item.skills}</p>
+                  {/* Study Details */}
+                  <div className="text-center sm:text-left">
+                    <p className="text-lg font-semibold">{item.duration}</p>
+                    <p className="text-xl font-semibold">{item.institution}</p>
+                    <p className="text-lg">{item.degree}</p>
+
+                    {/* Details */}
+                    <p className="text-sm text-gray-400 mt-2">{item.details}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </TabsContent>
-
-        {/* Studies Tab */}
-        <TabsContent value="studies">
-          <div className="space-y-4 border border-[#D9D9D9] p-4 rounded-xl">
-            {studiesData.map((item) => (
-              <div
-                key={item.id}
-                className="flex flex-col sm:flex-row items-center sm:items-start space-x-6 sm:space-x-8 p-6 rounded-lg shadow-md"
-              >
-                {/* Circular Image */}
-                <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-800 flex items-center justify-center">
-                  <Image
-                    src={item.image}
-                    alt={`Study Experience ${item.id}`}
-                    width={96}
-                    height={96}
-                    className="object-contain"
-                  />
-                </div>
-
-                {/* Study Details */}
-                <div className="text-center sm:text-left">
-                  <p className="text-lg font-semibold">{item.duration}</p>
-                  <p className="text-xl font-semibold">{item.institution}</p>
-                  <p className="text-lg">{item.degree}</p>
-
-                  {/* Details */}
-                  <p className="text-sm text-gray-400 mt-2">{item.details}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </TabsContent>
-      </Tabs>
+              ))}
+            </div>
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
   );
 };

@@ -6,8 +6,8 @@ import Image from "next/image";
 
 const Hero: React.FC = () => {
   return (
-    <div className="w-full">
-      <div className="max-w-[900px] h-[80vh] mx-auto flex flex-col justify-center relative px-4">
+    <div className="w-full px-4">
+      <div className="max-w-[900px] h-[80vh] mx-auto flex flex-col justify-center relative">
         <div>
           {/* Glowing Background */}
           <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 rounded-xl blur-xl opacity-30 -z-10"></div>

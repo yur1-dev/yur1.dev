@@ -194,95 +194,97 @@ const Portfolio: React.FC = () => {
   };
 
   return (
-    <div className="max-w-[900px] mx-auto my-12 p-6 text-white">
-      <h1 className="text-4xl font-semibold mb-6">Portfolio</h1>
+    <div className="w-full px-4">
+      <div className="max-w-[900px] mx-auto my-12">
+        <h1 className="text-4xl font-semibold mb-6">Portfolio</h1>
 
-      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        {selectedCard && (
-          <DialogContent className="bg-[rgb(13,13,13)] text-white border rounded-xl sm:max-w-[400px] md:max-w-[700px] lg:px-4 px-2 py-4 max-h-[90vh] overflow-auto">
-            <div className="flex flex-col gap-4">
-              {/* Image Section */}
-              <div className="flex flex-col w-full p-2 px-6">
-                {selectedImage && (
-                  <Image
-                    src={selectedImage}
-                    alt={`Preview of ${selectedCard.title}`}
-                    width={500} // Set width
-                    height={300} // Set height
-                    className="w-full max-w-[300px] object-cover rounded-lg mx-auto"
-                    loading="lazy"
-                    onClick={() => handleImageClick(selectedImage)} // Add the onClick handler here
-                  />
-                )}
-              </div>
-
-              {/* Features and Buttons */}
-              <div className="w-full p-2 flex flex-col">
-                <DialogHeader>
-                  <DialogTitle className="text-lg font-bold">
-                    {selectedCard.title}
-                  </DialogTitle>
-                  <DialogDescription className="text-sm text-gray-300">
-                    {selectedCard.fullDetails}
-                  </DialogDescription>
-                </DialogHeader>
-
-                <div className="my-4">
-                  <h3 className="text-lg font-semibold mb-2">Features:</h3>
-                  <ul className="list-disc list-inside text-gray-300">
-                    {selectedCard.features.map((feature, index) => (
-                      <li key={index}>{feature}</li>
-                    ))}
-                  </ul>
+        <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+          {selectedCard && (
+            <DialogContent className="bg-[rgb(13,13,13)] text-white border rounded-xl sm:max-w-[400px] md:max-w-[700px] lg:px-4 px-2 py-4 max-h-[90vh] overflow-auto">
+              <div className="flex flex-col gap-4">
+                {/* Image Section */}
+                <div className="flex flex-col w-full p-2 px-6">
+                  {selectedImage && (
+                    <Image
+                      src={selectedImage}
+                      alt={`Preview of ${selectedCard.title}`}
+                      width={500} // Set width
+                      height={300} // Set height
+                      className="w-full max-w-[300px] object-cover rounded-lg mx-auto"
+                      loading="lazy"
+                      onClick={() => handleImageClick(selectedImage)} // Add the onClick handler here
+                    />
+                  )}
                 </div>
 
-                <div className="flex gap-2 mt-auto">
-                  <a
-                    href={selectedCard.githubLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Button className="w-full bg-gray-800 text-white hover:bg-gray-700 py-2 text-sm font-bold rounded">
-                      GitHub
-                    </Button>
-                  </a>
-                  <a
-                    href={selectedCard.liveDemoLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Button className="w-full bg-blue-600 text-white hover:bg-blue-500 py-2 text-sm font-bold rounded">
-                      Live Demo
-                    </Button>
-                  </a>
+                {/* Features and Buttons */}
+                <div className="w-full p-2 flex flex-col">
+                  <DialogHeader>
+                    <DialogTitle className="text-lg font-bold">
+                      {selectedCard.title}
+                    </DialogTitle>
+                    <DialogDescription className="text-sm text-gray-300">
+                      {selectedCard.fullDetails}
+                    </DialogDescription>
+                  </DialogHeader>
+
+                  <div className="my-4">
+                    <h3 className="text-lg font-semibold mb-2">Features:</h3>
+                    <ul className="list-disc list-inside text-gray-300">
+                      {selectedCard.features.map((feature, index) => (
+                        <li key={index}>{feature}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="flex gap-2 mt-auto">
+                    <a
+                      href={selectedCard.githubLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Button className="w-full bg-gray-800 text-white hover:bg-gray-700 py-2 text-sm font-bold rounded">
+                        GitHub
+                      </Button>
+                    </a>
+                    <a
+                      href={selectedCard.liveDemoLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Button className="w-full bg-blue-600 text-white hover:bg-blue-500 py-2 text-sm font-bold rounded">
+                        Live Demo
+                      </Button>
+                    </a>
+                  </div>
                 </div>
               </div>
+            </DialogContent>
+          )}
+        </Dialog>
+
+        <div className="grid grid-cols-1 justify-items-center md:grid-cols-2 gap-6">
+          {cardsData.map((card, index) => (
+            <div
+              key={index}
+              className="cursor-pointer w-full"
+              onClick={() => handleCardClick(card)}
+            >
+              <ProjectCard data={card} onClick={() => handleCardClick(card)}>
+                <Button
+                  variant="outline"
+                  className="w-full text-black font-semibold rounded border-white hover:bg-white hover:text-black"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleCardClick(card);
+                  }}
+                >
+                  Learn More
+                </Button>
+              </ProjectCard>
             </div>
-          </DialogContent>
-        )}
-      </Dialog>
-
-      <div className="grid grid-cols-1 justify-items-center md:grid-cols-2 gap-6">
-        {cardsData.map((card, index) => (
-          <div
-            key={index}
-            className="cursor-pointer w-full"
-            onClick={() => handleCardClick(card)}
-          >
-            <ProjectCard data={card} onClick={() => handleCardClick(card)}>
-              <Button
-                variant="outline"
-                className="w-full text-black font-semibold rounded border-white hover:bg-white hover:text-black"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleCardClick(card);
-                }}
-              >
-                Learn More
-              </Button>
-            </ProjectCard>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
