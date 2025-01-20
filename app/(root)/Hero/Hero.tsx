@@ -33,7 +33,7 @@ const Hero: React.FC = () => {
               <div>
                 <Button className="rounded bg-secondary text-white">
                   <a className="text-sm font-semibold" href="">
-                    Hire me1
+                    Hire me
                   </a>
                 </Button>
               </div>
