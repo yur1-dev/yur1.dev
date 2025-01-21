@@ -11,8 +11,8 @@ export default function Home() {
   return (
     <main className="relative w-full min-h-screen overflow-x-hidden overflow-y-hidden">
       <div className="w-full">
-        <Cgradients />
         <Navbar />
+        <Cgradients />
         <Hero />
         <Experience />
         <Techstack />

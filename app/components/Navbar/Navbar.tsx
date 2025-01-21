@@ -1,10 +1,21 @@
-"use client";
+"use client"; // Add this line at the top
 
+import { useState, useEffect } from "react";
+import clsx from "clsx";
 import { Button } from "@/components/ui/button";
-import React, { useState } from "react";
+import Link from "next/link";
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Disable scrolling on mobile menu open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden"; // Disable scroll when menu is open
+    } else {
+      document.body.style.overflow = "auto"; // Enable scroll when menu is closed
+    }
+  }, [isMobileMenuOpen]);
 
   return (
     <div className="w-full bg-grid">
@@ -16,18 +27,10 @@ const Navbar = () => {
 
             {/* Desktop Navigation */}
             <ul className="hidden md:flex items-center gap-8">
-              <li className="cursor-pointer hover:text-gray-300 transition-colors">
-                Intro
-              </li>
-              <li className="cursor-pointer hover:text-gray-300 transition-colors">
-                Experience
-              </li>
-              <li className="cursor-pointer hover:text-gray-300 transition-colors">
-                Projects
-              </li>
-              <li className="cursor-pointer hover:text-gray-300 transition-colors">
-                Contacts
-              </li>
+              <NavItem href="/">Intro</NavItem>
+              <NavItem href="/experience">Experience</NavItem>
+              <NavItem href="/projects">Projects</NavItem>
+              <NavItem href="/contacts">Contacts</NavItem>
             </ul>
 
             {/* Mobile Menu Button */}
@@ -63,35 +66,64 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Navigation Menu */}
-          {isMobileMenuOpen && (
-            <div className="mt-4 md:hidden">
-              <ul className="flex flex-col gap-4">
-                <li className="cursor-pointer hover:text-gray-300 transition-colors">
-                  Intro
-                </li>
-                <li className="cursor-pointer hover:text-gray-300 transition-colors">
-                  About
-                </li>
-                <li className="cursor-pointer hover:text-gray-300 transition-colors">
-                  Projects
-                </li>
-                <li className="cursor-pointer hover:text-gray-300 transition-colors">
-                  Contacts
-                </li>
-                <li>
-                  <Button className="rounded w-full" variant="secondary">
-                    <a className="text-sm font-semibold" href="#">
-                      Download CV
-                    </a>
-                  </Button>
-                </li>
-              </ul>
-            </div>
-          )}
+          <div
+            className={clsx(
+              "fixed top-0 left-0 w-full h-full bg-black z-50 flex flex-col items-center justify-center transform transition-transform duration-300",
+              {
+                "translate-x-0": isMobileMenuOpen,
+                "-translate-x-full": !isMobileMenuOpen, // This hides the menu when it's closed
+              }
+            )}
+          >
+            <ul className="flex flex-col gap-4 text-center text-white text-lg">
+              <NavItem href="/">Intro</NavItem>
+              <NavItem href="/experience">Experience</NavItem>
+              <NavItem href="/projects">Projects</NavItem>
+              <NavItem href="/contacts">Contacts</NavItem>
+              <li>
+                <Button className="rounded w-full" variant="secondary">
+                  <a className="text-sm font-semibold" href="#">
+                    Download CV
+                  </a>
+                </Button>
+              </li>
+            </ul>
+
+            {/* Close Button */}
+            <button
+              className="absolute top-4 right-4 text-white"
+              onClick={() => setIsMobileMenuOpen(false)}
+              aria-label="Close menu"
+            >
+              <svg
+                className="w-6 h-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>
   );
 };
+
+const NavItem: React.FC<{ href: string; children: React.ReactNode }> = ({
+  href,
+  children,
+}) => (
+  <li className="cursor-pointer hover:text-gray-300 transition-colors">
+    <Link href={href}>{children}</Link>
+  </li>
+);
 
 export default Navbar;
