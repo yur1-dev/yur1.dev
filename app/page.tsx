@@ -9,7 +9,7 @@ import Cgradients from "./components/Cgradients/Cgradients";
 
 export default function Home() {
   return (
-    <main className="relative w-full overflow-x-hidden">
+    <main className="relative w-full min-h-screen overflow-x-hidden overflow-y-hidden">
       <div className="w-full">
         <Cgradients />
         <Navbar />
