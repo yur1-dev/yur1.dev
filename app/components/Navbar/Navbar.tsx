@@ -1,4 +1,4 @@
-"use client"; // Add this line at the top
+"use client";
 
 import { useState, useEffect } from "react";
 import clsx from "clsx";
@@ -7,6 +7,7 @@ import Link from "next/link";
 
 const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isNavbarVisible, setIsNavbarVisible] = useState(false);
 
   // Disable scrolling on mobile menu open
   useEffect(() => {
@@ -17,8 +18,18 @@ const Navbar: React.FC = () => {
     }
   }, [isMobileMenuOpen]);
 
+  // Handle page load animation for Navbar (top to bottom)
+  useEffect(() => {
+    setIsNavbarVisible(true);
+  }, []);
+
   return (
-    <div className="w-full bg-grid">
+    <div
+      className={clsx("w-full bg-grid transition-all duration-500 transform", {
+        "-translate-y-full opacity-0": !isNavbarVisible, // Initially hide the navbar above the screen
+        "translate-y-0 opacity-100": isNavbarVisible, // Slide it down into place
+      })}
+    >
       <div className="w-full px-4">
         <div className="max-w-[900px] mx-auto py-4">
           <div className="flex justify-between items-center">
@@ -68,10 +79,10 @@ const Navbar: React.FC = () => {
           {/* Mobile Navigation Menu */}
           <div
             className={clsx(
-              "fixed top-0 left-0 w-full h-full bg-black z-50 flex flex-col items-center justify-center transform transition-transform duration-300",
+              "fixed top-0 left-0 w-full h-full bg-black z-50 flex flex-col items-center justify-center transform transition-all duration-500",
               {
-                "translate-x-0": isMobileMenuOpen,
-                "-translate-x-full": !isMobileMenuOpen, // This hides the menu when it's closed
+                "translate-x-0 opacity-100": isMobileMenuOpen,
+                "-translate-x-full opacity-0": !isMobileMenuOpen,
               }
             )}
           >

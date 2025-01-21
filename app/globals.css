@@ -42,3 +42,20 @@ body {
     background-size: 100px 100px;
   }
 }
+
+.animate-fadeIn {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes slideInTitle {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in-title {
+  animation: slideInTitle 1000ms ease-out;
+}

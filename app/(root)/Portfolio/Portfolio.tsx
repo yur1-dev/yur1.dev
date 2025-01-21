@@ -9,7 +9,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const techIcons = {
   Next: "/nextjs.svg",
@@ -47,35 +47,33 @@ const ProjectCard: React.FC<{
   return (
     <div className="max-w-[900px]">
       <div className="w-full rounded-xl border bg-[rgb(13,13,13)] shadow-inner text-white overflow-hidden">
-        <div className="">
-          <div className="w-full aspect-video relative">
-            <Image
-              src={data.imageSrc}
-              alt={data.title}
-              width={500} // Set a specific width
-              height={300} // Set a specific height
-              className="w-full h-full object-cover"
-              loading="lazy"
-            />
+        <div className="w-full aspect-video relative">
+          <Image
+            src={data.imageSrc}
+            alt={data.title}
+            width={500}
+            height={300}
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+        <div className="p-4">
+          <h3 className="text-xl mb-2">{data.title}</h3>
+          <p className="text-gray-300 mb-4">{data.description}</p>
+          <div className="flex flex-wrap gap-2 mb-4">
+            {data.technologies.map((tech, index) => (
+              <Image
+                key={index}
+                src={getTechIcon(tech)}
+                alt={tech}
+                width={24}
+                height={24}
+                className="w-6 h-6"
+                loading="lazy"
+              />
+            ))}
           </div>
-          <div className="p-4">
-            <h3 className="text-xl mb-2">{data.title}</h3>
-            <p className="text-gray-300 mb-4">{data.description}</p>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {data.technologies.map((tech, index) => (
-                <Image
-                  key={index}
-                  src={getTechIcon(tech)}
-                  alt={tech}
-                  width={24} // Set a width for the tech icons
-                  height={24} // Set a height for the tech icons
-                  className="w-6 h-6"
-                  loading="lazy"
-                />
-              ))}
-            </div>
-            {children}
-          </div>
+          {children}
         </div>
       </div>
     </div>
@@ -96,128 +94,100 @@ const Portfolio: React.FC = () => {
       learnMoreLink: "#",
       fullDetails: "Solana Vibe Station: Your Solana RPCs Gateway",
       galleryImages: ["/svs-hero.png", "/images/project1-3.png"],
-      features: [
-        "Authentication",
-        "Users can create, edit, and delete posts",
-        "Users can comment on posts",
-        "Users can like posts",
-        "Users can search for posts",
-        "Rich Markdown Support",
-      ],
+      features: ["Authentication", "Rich Markdown Support"],
       githubLink: "https://github.com/example/project1",
       liveDemoLink: "https://example.com/project1",
     },
     {
-      imageSrc: "/images/project2.png",
-      title: "E-Commerce Platform",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      technologies: ["Node.js", "Next", "Tailwind"],
+      imageSrc: "/project2-image.png",
+      title: "Project 2",
+      description: "Another amazing project",
+      technologies: ["React", "Tailwind", "Node.js"],
       learnMoreLink: "#",
-      fullDetails:
-        "This is a detailed description of the E-Commerce Platform project.",
-      galleryImages: [
-        "/images/project2-1.png",
-        "/images/project2-2.png",
-        "/images/project2-3.png",
-      ],
-      features: [
-        "Product Listings",
-        "Shopping Cart",
-        "Order Management",
-        "Payment Integration",
-        "User Authentication",
-        "Admin Dashboard",
-      ],
+      fullDetails: "Project 2: A detailed description of the project.",
+      galleryImages: ["/project2-1.png", "/project2-2.png"],
+      features: ["Feature 1", "Feature 2"],
       githubLink: "https://github.com/example/project2",
       liveDemoLink: "https://example.com/project2",
     },
     {
-      imageSrc: "/images/project3.png",
-      title: "Portfolio Website",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      technologies: ["React", "TS", "CSS"],
+      imageSrc: "/project3-image.png",
+      title: "Project 3",
+      description: "Innovative web app for task management",
+      technologies: ["Next", "React", "MongoDB"],
       learnMoreLink: "#",
-      fullDetails:
-        "This is a detailed description of the Portfolio Website project.",
-      galleryImages: [
-        "/images/project3-1.png",
-        "/images/project3-2.png",
-        "/images/project3-3.png",
-      ],
-      features: [
-        "Responsive Design",
-        "Custom Animations",
-        "Dynamic Content",
-        "Optimized Performance",
-        "SEO-Friendly",
-      ],
+      fullDetails: "Project 3: An app to manage tasks effectively.",
+      galleryImages: ["/project3-1.png", "/project3-2.png"],
+      features: ["Task Creation", "Collaboration Tools"],
       githubLink: "https://github.com/example/project3",
       liveDemoLink: "https://example.com/project3",
     },
     {
-      imageSrc: "/images/project4.png",
-      title: "Mobile App Design",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      technologies: ["Figma", "React Native", "Tailwind"],
+      imageSrc: "/project4-image.png",
+      title: "Project 4",
+      description: "Revolutionary data analysis platform",
+      technologies: ["Python", "Django", "PostgreSQL"],
       learnMoreLink: "#",
-      fullDetails:
-        "This is a detailed description of the Mobile App Design project.",
-      galleryImages: [
-        "/images/project4-1.png",
-        "/images/project4-2.png",
-        "/images/project4-3.png",
-      ],
-      features: [
-        "User-Friendly Interface",
-        "Cross-Platform Support",
-        "Push Notifications",
-        "Offline Mode",
-        "Real-Time Updates",
-      ],
+      fullDetails: "Project 4: A platform for advanced data analysis.",
+      galleryImages: ["/project4-1.png", "/project4-2.png"],
+      features: ["Data Analytics", "Real-time Insights"],
       githubLink: "https://github.com/example/project4",
       liveDemoLink: "https://example.com/project4",
     },
   ];
 
   const handleCardClick = (card: CardData) => {
-    if (!card.galleryImages || card.galleryImages.length === 0) {
-      console.error("No images available for this card.");
-      return;
-    }
     setSelectedCard(card);
     setIsModalOpen(true);
     setSelectedImage(card.galleryImages[0]);
   };
 
-  const handleImageClick = (image: string) => {
-    setSelectedImage(image);
-  };
+  const observerRef = useRef<any>(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+
+    return () => {
+      if (observerRef.current) {
+        observer.unobserve(observerRef.current);
+      }
+    };
+  }, [hasAnimated]);
 
   return (
     <div className="w-full px-4">
-      <div className="max-w-[900px] mx-auto my-12">
+      <div className="max-w-[900px] mx-auto my-12 mb-20">
         <h1 className="text-4xl font-semibold mb-6">Portfolio</h1>
 
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
           {selectedCard && (
             <DialogContent className="bg-[rgb(13,13,13)] text-white border rounded-xl sm:max-w-[400px] md:max-w-[700px] lg:px-4 px-2 py-4 max-h-[90vh] overflow-auto">
               <div className="flex flex-col gap-4">
-                {/* Image Section */}
                 <div className="flex flex-col w-full p-2 px-6">
                   {selectedImage && (
                     <Image
                       src={selectedImage}
                       alt={`Preview of ${selectedCard.title}`}
-                      width={500} // Set width
-                      height={300} // Set height
+                      width={500}
+                      height={300}
                       className="w-full max-w-[300px] object-cover rounded-lg mx-auto"
                       loading="lazy"
-                      onClick={() => handleImageClick(selectedImage)} // Add the onClick handler here
                     />
                   )}
                 </div>
-
-                {/* Features and Buttons */}
                 <div className="w-full p-2 flex flex-col">
                   <DialogHeader>
                     <DialogTitle className="text-lg font-bold">
@@ -227,7 +197,6 @@ const Portfolio: React.FC = () => {
                       {selectedCard.fullDetails}
                     </DialogDescription>
                   </DialogHeader>
-
                   <div className="my-4">
                     <h3 className="text-lg font-semibold mb-2">Features:</h3>
                     <ul className="list-disc list-inside text-gray-300">
@@ -236,22 +205,13 @@ const Portfolio: React.FC = () => {
                       ))}
                     </ul>
                   </div>
-
                   <div className="flex gap-2 mt-auto">
-                    <a
-                      href={selectedCard.githubLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <a href={selectedCard.githubLink} target="_blank">
                       <Button className="w-full bg-gray-800 text-white hover:bg-gray-700 py-2 text-sm font-bold rounded">
                         GitHub
                       </Button>
                     </a>
-                    <a
-                      href={selectedCard.liveDemoLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <a href={selectedCard.liveDemoLink} target="_blank">
                       <Button className="w-full bg-blue-600 text-white hover:bg-blue-500 py-2 text-sm font-bold rounded">
                         Live Demo
                       </Button>
@@ -267,7 +227,10 @@ const Portfolio: React.FC = () => {
           {cardsData.map((card, index) => (
             <div
               key={index}
-              className="cursor-pointer w-full"
+              className={`cursor-pointer w-full opacity-0 transform translate-y-10 transition-all duration-500 ${
+                hasAnimated ? "opacity-100 translate-y-0" : ""
+              }`}
+              ref={observerRef}
               onClick={() => handleCardClick(card)}
             >
               <ProjectCard data={card} onClick={() => handleCardClick(card)}>

@@ -1,5 +1,7 @@
+"use client";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
 const Experience = () => {
@@ -58,23 +60,66 @@ const Experience = () => {
     },
   ];
 
+  const [isVisible, setIsVisible] = useState(false);
+  const experienceRef = useRef(null);
+
+  // Intersection Observer to detect when Experience section is in view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true); // Trigger animation when the section is in view
+        }
+      },
+      { threshold: 0.3 } // Trigger when 30% of the section is visible
+    );
+
+    if (experienceRef.current) {
+      observer.observe(experienceRef.current);
+    }
+
+    return () => {
+      if (experienceRef.current) {
+        observer.unobserve(experienceRef.current);
+      }
+    };
+  }, []);
+
   return (
     <div className="w-full px-4">
-      <div className="max-w-[900px] mx-auto my-12">
-        <h1 className="text-4xl font-semibold mb-6 text-center sm:text-left">
+      <div
+        ref={experienceRef}
+        className="max-w-[900px] mx-auto my-12 transform transition-all duration-1000"
+      >
+        {/* Title Animation: Slide from top to bottom */}
+        <h1
+          className={`text-4xl font-semibold mb-6 text-center sm:text-left transform transition-all duration-1000 ${
+            isVisible
+              ? "translate-y-0 opacity-100"
+              : "-translate-y-10 opacity-0"
+          }`}
+        >
           Experience
         </h1>
+
         <Tabs defaultValue="work" className="w-full">
-          <TabsList className="flex justify-center bg-[#0D0D0D] space-x-4 mb-6">
+          {/* TabsList with Transition */}
+          <TabsList
+            className={`flex justify-center bg-[#0D0D0D] space-x-4 mb-6 transform transition-all duration-1000 ${
+              isVisible
+                ? "translate-x-0 opacity-100"
+                : "-translate-x-full opacity-0"
+            }`}
+          >
             <TabsTrigger
               value="work"
-              className="py-1 px-6 sm:px-12 md:px-[11.5rem] text-white text-lg font-normal rounded-xl transition-colors duration-200"
+              className="py-1 px-6 sm:px-12 md:px-[11.5rem] text-white text-lg font-normal rounded-xl transition-colors duration-1000"
             >
               Work
             </TabsTrigger>
             <TabsTrigger
               value="studies"
-              className="py-1 px-6 sm:px-12 md:px-[11.5rem] text-white text-lg font-normal rounded-xl transition-colors duration-200"
+              className="py-1 px-6 sm:px-12 md:px-[11.5rem] text-white text-lg font-normal rounded-xl transition-colors duration-1000"
             >
               Studies
             </TabsTrigger>
@@ -82,11 +127,21 @@ const Experience = () => {
 
           {/* Work Tab */}
           <TabsContent value="work">
-            <div className="space-y-4 border border-[#D9D9D9] p-4 rounded-xl">
+            <div
+              className={`space-y-4 border border-[#D9D9D9] p-4 rounded-xl transform transition-all duration-1000 ${
+                isVisible
+                  ? "translate-x-0 opacity-100"
+                  : "-translate-x-full opacity-0"
+              }`}
+            >
               {workData.map((item) => (
                 <div
                   key={item.id}
-                  className="flex flex-col sm:flex-row items-center sm:items-start space-x-6 sm:space-x-8 p-6 rounded-lg shadow-md"
+                  className={`flex flex-col sm:flex-row items-center sm:items-start space-x-6 sm:space-x-8 p-6 rounded-lg shadow-md transform transition-all duration-1000 ${
+                    isVisible
+                      ? "translate-x-0 opacity-100"
+                      : "-translate-x-full opacity-0"
+                  }`}
                 >
                   {/* Circular Image */}
                   <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-800 flex items-center justify-center">
@@ -115,11 +170,21 @@ const Experience = () => {
 
           {/* Studies Tab */}
           <TabsContent value="studies">
-            <div className="space-y-4 border border-[#D9D9D9] p-4 rounded-xl">
+            <div
+              className={`space-y-4 border border-[#D9D9D9] p-4 rounded-xl transform transition-all duration-1000 ${
+                isVisible
+                  ? "translate-x-0 opacity-100"
+                  : "-translate-x-full opacity-0"
+              }`}
+            >
               {studiesData.map((item) => (
                 <div
                   key={item.id}
-                  className="flex flex-col sm:flex-row items-center sm:items-start space-x-6 sm:space-x-8 p-6 rounded-lg shadow-md"
+                  className={`flex flex-col sm:flex-row items-center sm:items-start space-x-6 sm:space-x-8 p-6 rounded-lg shadow-md transform transition-all duration-1000 ${
+                    isVisible
+                      ? "translate-x-0 opacity-100"
+                      : "-translate-x-full opacity-0"
+                  }`}
                 >
                   {/* Circular Image */}
                   <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-800 flex items-center justify-center">
