@@ -61,10 +61,12 @@ const Experience = () => {
   ];
 
   const [isVisible, setIsVisible] = useState(false);
-  const experienceRef = useRef(null);
+  const experienceRef = useRef<HTMLDivElement>(null);
 
   // Intersection Observer to detect when Experience section is in view
   useEffect(() => {
+    const targetElement = experienceRef.current; // Cache the current value
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -74,13 +76,13 @@ const Experience = () => {
       { threshold: 0.3 } // Trigger when 30% of the section is visible
     );
 
-    if (experienceRef.current) {
-      observer.observe(experienceRef.current);
+    if (targetElement) {
+      observer.observe(targetElement);
     }
 
     return () => {
-      if (experienceRef.current) {
-        observer.unobserve(experienceRef.current);
+      if (targetElement) {
+        observer.unobserve(targetElement);
       }
     };
   }, []);
