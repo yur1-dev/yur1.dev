@@ -142,10 +142,11 @@ const Portfolio: React.FC = () => {
     setSelectedImage(card.galleryImages[0]);
   };
 
-  const observerRef = useRef<any>(null);
+  const observerRef = useRef<HTMLDivElement>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
+    const currentRef = observerRef.current;
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
@@ -156,13 +157,13 @@ const Portfolio: React.FC = () => {
       { threshold: 0.1 }
     );
 
-    if (observerRef.current) {
-      observer.observe(observerRef.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (observerRef.current) {
-        observer.unobserve(observerRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, [hasAnimated]);
