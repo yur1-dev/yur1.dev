@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar/Navbar";
+import Image from "next/image";
 
 const Page = () => {
   const projectNames = ["Project 1", "Project 2", "Project 3", "Project 4"]; // Array of names corresponding to each image
@@ -22,10 +23,11 @@ const Page = () => {
               key={index}
               className="group relative flex-shrink-0 w-1/4 h-full cursor-pointer overflow-hidden"
             >
-              <img
+              <Image
                 src={src}
                 alt={`Card ${index}`}
-                className="absolute inset-0 h-full w-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500 ease-in-out"
+                fill
+                className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500 ease-in-out"
               />
               <div className="absolute bottom-0 w-full bg-black/80 transform translate-y-full group-hover:translate-y-0 transition-all duration-500 ease-in-out">
                 <div className="p-6 text-center">
