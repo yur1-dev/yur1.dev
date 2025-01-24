@@ -43,19 +43,107 @@ body {
   }
 }
 
-.animate-fadeIn {
-  animation: fadeIn 1s ease-in-out;
+/* Fullscreen Loading Screen */
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.5s ease;
 }
 
-@keyframes slideInTitle {
+#loading-screen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
   0% {
-    transform: translateY(100%);
+    opacity: 0;
+    transform: translateY(20px);
   }
   100% {
+    opacity: 1;
     transform: translateY(0);
   }
 }
 
-.animate-slide-in-title {
-  animation: slideInTitle 1000ms ease-out;
+/* Slide-in Animation from the left */
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide-in Animation from the right */
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* global.css */
+
+/* Animation for Section */
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-section {
+  animation: slideIn 1s ease-out;
+}
+
+/* Animation for Title */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-title {
+  animation: fadeIn 1s ease-out;
+}
+
+/* Animation for List Items */
+@keyframes slideInItem {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-item {
+  animation: slideInItem 1s ease-out;
 }

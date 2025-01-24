@@ -53,7 +53,7 @@ const Techstack: React.FC = () => {
           setIsVisible(true); // Trigger animations when in view
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.8 }
     );
 
     if (techStackRef.current) {
@@ -73,7 +73,7 @@ const Techstack: React.FC = () => {
         ref={techStackRef}
         className="max-w-[900px] h-[80vh] mx-auto flex flex-col justify-center relative"
       >
-        {/* Title Animation */}
+        {/* Title */}
         <div
           className={`my-8 p-4 text-white transform transition-all duration-1000 ${
             isVisible
@@ -81,7 +81,7 @@ const Techstack: React.FC = () => {
               : "-translate-y-10 opacity-0"
           }`}
         >
-          <h2 className="text-3xl font-semibold mb-4">Tech Stack</h2>
+          <h2 className="text-4xl font-semibold mb-4">Tech Stack</h2>
         </div>
 
         {/* Tech Stack Items */}
@@ -91,7 +91,7 @@ const Techstack: React.FC = () => {
               key={tech.alt}
               className={`flex items-center border rounded-xl shadow-inner bg-[rgb(13,13,13)] p-2 sm:p-4 transform transition-all duration-1000 ${
                 isVisible
-                  ? `translate-x-0 opacity-100 delay-${index * 100}`
+                  ? `translate-x-0 opacity-100 delay-[${index * 100}ms]`
                   : "-translate-x-full opacity-0"
               }`}
             >

@@ -5,7 +5,6 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
 const Experience = () => {
-  // Work and Studies Data
   const workData = [
     {
       id: 1,
@@ -63,17 +62,16 @@ const Experience = () => {
   const [isVisible, setIsVisible] = useState(false);
   const experienceRef = useRef<HTMLDivElement>(null);
 
-  // Intersection Observer to detect when Experience section is in view
   useEffect(() => {
-    const targetElement = experienceRef.current; // Cache the current value
+    const targetElement = experienceRef.current;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true); // Trigger animation when the section is in view
+          setIsVisible(true); // Show content when it's in view
         }
       },
-      { threshold: 0.3 } // Trigger when 30% of the section is visible
+      { threshold: 0.8 } // Trigger when 50% of the element is in the viewport
     );
 
     if (targetElement) {
@@ -91,37 +89,30 @@ const Experience = () => {
     <div className="w-full px-4">
       <div
         ref={experienceRef}
-        className="max-w-[900px] mx-auto my-12 transform transition-all duration-1000"
+        className={`max-w-[900px] mx-auto my-12 transform transition-all duration-1000 ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        }`}
       >
         {/* Title Animation: Slide from top to bottom */}
         <h1
           className={`text-4xl font-semibold mb-6 text-center sm:text-left transform transition-all duration-1000 ${
-            isVisible
-              ? "translate-y-0 opacity-100"
-              : "-translate-y-10 opacity-0"
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
           Experience
         </h1>
 
         <Tabs defaultValue="work" className="w-full">
-          {/* TabsList with Transition */}
-          <TabsList
-            className={`flex justify-center bg-[#0D0D0D] space-x-4 mb-6 transform transition-all duration-1000 ${
-              isVisible
-                ? "translate-x-0 opacity-100"
-                : "-translate-x-full opacity-0"
-            }`}
-          >
+          <TabsList className="flex justify-center bg-[#0D0D0D] space-x-4 mb-6">
             <TabsTrigger
               value="work"
-              className="py-1 px-6 sm:px-12 md:px-[11.5rem] text-white text-lg font-normal rounded-xl transition-colors duration-1000"
+              className="py-1 px-4 sm:px-6 md:px-12 text-white text-lg font-normal rounded-xl"
             >
               Work
             </TabsTrigger>
             <TabsTrigger
               value="studies"
-              className="py-1 px-6 sm:px-12 md:px-[11.5rem] text-white text-lg font-normal rounded-xl transition-colors duration-1000"
+              className="py-1 px-4 sm:px-6 md:px-12 text-white text-lg font-normal rounded-xl"
             >
               Studies
             </TabsTrigger>
@@ -130,19 +121,19 @@ const Experience = () => {
           {/* Work Tab */}
           <TabsContent value="work">
             <div
-              className={`space-y-4 border border-[#D9D9D9] p-4 rounded-xl transform transition-all duration-1000 ${
+              className={`space-y-4 border border-[#D9D9D9] p-4 rounded-xl ${
                 isVisible
-                  ? "translate-x-0 opacity-100"
-                  : "-translate-x-full opacity-0"
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
               }`}
             >
               {workData.map((item) => (
                 <div
                   key={item.id}
-                  className={`flex flex-col sm:flex-row items-center sm:items-start space-x-6 sm:space-x-8 p-6 rounded-lg shadow-md transform transition-all duration-1000 ${
+                  className={`page-transition flex flex-col sm:flex-col md:flex-row items-center sm:items-start sm:space-x-8 p-6 rounded-lg shadow-md ${
                     isVisible
-                      ? "translate-x-0 opacity-100"
-                      : "-translate-x-full opacity-0"
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-8"
                   }`}
                 >
                   {/* Circular Image */}
@@ -152,7 +143,7 @@ const Experience = () => {
                       alt={`Work Experience ${item.id}`}
                       width={96}
                       height={96}
-                      className="object-contain"
+                      className="object-contain w-full"
                     />
                   </div>
 
@@ -162,7 +153,6 @@ const Experience = () => {
                     <p className="text-xl font-semibold">{item.company}</p>
                     <p className="text-lg">{item.role}</p>
 
-                    {/* Skills/Technologies */}
                     <p className="text-sm text-gray-400 mt-2">{item.skills}</p>
                   </div>
                 </div>
@@ -173,39 +163,36 @@ const Experience = () => {
           {/* Studies Tab */}
           <TabsContent value="studies">
             <div
-              className={`space-y-4 border border-[#D9D9D9] p-4 rounded-xl transform transition-all duration-1000 ${
+              className={`space-y-4 border border-[#D9D9D9] p-4 rounded-xl ${
                 isVisible
-                  ? "translate-x-0 opacity-100"
-                  : "-translate-x-full opacity-0"
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
               }`}
             >
               {studiesData.map((item) => (
                 <div
                   key={item.id}
-                  className={`flex flex-col sm:flex-row items-center sm:items-start space-x-6 sm:space-x-8 p-6 rounded-lg shadow-md transform transition-all duration-1000 ${
+                  className={`page-transition flex flex-col sm:flex-col md:flex-row items-center sm:items-start space-x- sm:space-x-8 p-6 rounded-lg shadow-md ${
                     isVisible
-                      ? "translate-x-0 opacity-100"
-                      : "-translate-x-full opacity-0"
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-8"
                   }`}
                 >
-                  {/* Circular Image */}
                   <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-800 flex items-center justify-center">
                     <Image
                       src={item.image}
                       alt={`Study Experience ${item.id}`}
                       width={96}
                       height={96}
-                      className="object-contain"
+                      className="object-contain w-full"
                     />
                   </div>
 
-                  {/* Study Details */}
                   <div className="text-center sm:text-left">
                     <p className="text-lg font-semibold">{item.duration}</p>
                     <p className="text-xl font-semibold">{item.institution}</p>
                     <p className="text-lg">{item.degree}</p>
 
-                    {/* Details */}
                     <p className="text-sm text-gray-400 mt-2">{item.details}</p>
                   </div>
                 </div>

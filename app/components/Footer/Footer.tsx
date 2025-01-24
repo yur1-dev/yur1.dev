@@ -13,7 +13,7 @@ const Footer = () => {
           setIsFooterVisible(true);
         }
       },
-      { threshold: 0.1 } // Trigger when 10% of the footer is visible
+      { threshold: 0.5 } // Trigger when 10% of the footer is visible
     );
 
     if (footerRef.current) {

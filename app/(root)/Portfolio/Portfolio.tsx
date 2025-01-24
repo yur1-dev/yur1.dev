@@ -1,15 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import React, { useState, useEffect, useRef } from "react";
+import { Button } from "@/components/ui/button";
 
 const techIcons = {
   Next: "/nextjs.svg",
@@ -85,6 +78,10 @@ const Portfolio: React.FC = () => {
   const [selectedCard, setSelectedCard] = useState<CardData | null>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
+  const [isTitleVisible, setIsTitleVisible] = useState(false);
+  const observerRef = useRef<HTMLDivElement>(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
+
   const cardsData: CardData[] = [
     {
       imageSrc: "/svs-hero.png",
@@ -110,30 +107,7 @@ const Portfolio: React.FC = () => {
       githubLink: "https://github.com/example/project2",
       liveDemoLink: "https://example.com/project2",
     },
-    {
-      imageSrc: "/project3-image.png",
-      title: "Project 3",
-      description: "Innovative web app for task management",
-      technologies: ["Next", "React", "MongoDB"],
-      learnMoreLink: "#",
-      fullDetails: "Project 3: An app to manage tasks effectively.",
-      galleryImages: ["/project3-1.png", "/project3-2.png"],
-      features: ["Task Creation", "Collaboration Tools"],
-      githubLink: "https://github.com/example/project3",
-      liveDemoLink: "https://example.com/project3",
-    },
-    {
-      imageSrc: "/project4-image.png",
-      title: "Project 4",
-      description: "Revolutionary data analysis platform",
-      technologies: ["Python", "Django", "PostgreSQL"],
-      learnMoreLink: "#",
-      fullDetails: "Project 4: A platform for advanced data analysis.",
-      galleryImages: ["/project4-1.png", "/project4-2.png"],
-      features: ["Data Analytics", "Real-time Insights"],
-      githubLink: "https://github.com/example/project4",
-      liveDemoLink: "https://example.com/project4",
-    },
+    // Add more projects as needed
   ];
 
   const handleCardClick = (card: CardData) => {
@@ -142,8 +116,9 @@ const Portfolio: React.FC = () => {
     setSelectedImage(card.galleryImages[0]);
   };
 
-  const observerRef = useRef<HTMLDivElement>(null);
-  const [hasAnimated, setHasAnimated] = useState(false);
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     const currentRef = observerRef.current;
@@ -168,16 +143,56 @@ const Portfolio: React.FC = () => {
     };
   }, [hasAnimated]);
 
+  useEffect(() => {
+    const titleObserver = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          setIsTitleVisible(true);
+        }
+      },
+      { threshold: 0.8 }
+    );
+
+    if (observerRef.current) {
+      titleObserver.observe(observerRef.current);
+    }
+
+    return () => {
+      if (observerRef.current) {
+        titleObserver.unobserve(observerRef.current);
+      }
+    };
+  }, []);
+
   return (
     <div className="w-full px-4">
       <div className="max-w-[900px] mx-auto my-12 mb-20">
-        <h1 className="text-4xl font-semibold mb-6">Portfolio</h1>
+        <h1
+          className={`text-4xl font-semibold mb-6 transition-opacity duration-500 ${
+            isTitleVisible ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          Portfolio
+        </h1>
 
-        <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-          {selectedCard && (
-            <DialogContent className="bg-[rgb(13,13,13)] text-white border rounded-xl sm:max-w-[400px] md:max-w-[700px] lg:px-4 px-2 py-4 max-h-[90vh] overflow-auto">
+        {isModalOpen && selectedCard && (
+          <div
+            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 flex items-center justify-center z-50"
+            onClick={handleModalClose} // Close modal when clicking outside
+          >
+            <div
+              className="w-full max-w-[700px] bg-[rgb(13,13,13)] text-white border rounded-xl p-4 sm:max-w-[400px]"
+              onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal content
+            >
               <div className="flex flex-col gap-4">
-                <div className="flex flex-col w-full p-2 px-6">
+                <div className="flex flex-col w-full p-2 px-6 relative">
+                  <button
+                    className="absolute top-0 right-0.5 text-white text-xl font-bold"
+                    onClick={handleModalClose}
+                  >
+                    X
+                  </button>
                   {selectedImage && (
                     <Image
                       src={selectedImage}
@@ -190,14 +205,11 @@ const Portfolio: React.FC = () => {
                   )}
                 </div>
                 <div className="w-full p-2 flex flex-col">
-                  <DialogHeader>
-                    <DialogTitle className="text-lg font-bold">
-                      {selectedCard.title}
-                    </DialogTitle>
-                    <DialogDescription className="text-sm text-gray-300">
-                      {selectedCard.fullDetails}
-                    </DialogDescription>
-                  </DialogHeader>
+                  <h2 className="text-lg font-bold">{selectedCard.title}</h2>
+                  <p className="text-sm text-gray-300">
+                    {selectedCard.fullDetails}
+                  </p>
+
                   <div className="my-4">
                     <h3 className="text-lg font-semibold mb-2">Features:</h3>
                     <ul className="list-disc list-inside text-gray-300">
@@ -220,16 +232,18 @@ const Portfolio: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </DialogContent>
-          )}
-        </Dialog>
+            </div>
+          </div>
+        )}
 
         <div className="grid grid-cols-1 justify-items-center md:grid-cols-2 gap-6">
           {cardsData.map((card, index) => (
             <div
               key={index}
-              className={`cursor-pointer w-full opacity-0 transform translate-y-10 transition-all duration-500 ${
-                hasAnimated ? "opacity-100 translate-y-0" : ""
+              className={`cursor-pointer w-full transform transition-transform duration-1000 ${
+                hasAnimated
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-[200px] opacity-0"
               }`}
               ref={observerRef}
               onClick={() => handleCardClick(card)}
