@@ -71,7 +71,7 @@ const Experience = () => {
           setIsVisible(true); // Show content when it's in view
         }
       },
-      { threshold: 0.8 } // Trigger when 50% of the element is in the viewport
+      { threshold: 0.5 } // Trigger when 50% of the element is in the viewport
     );
 
     if (targetElement) {

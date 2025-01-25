@@ -30,9 +30,14 @@ export default {
             transform: "translateY(0)",
           },
         },
+        shine: {
+          "0%": { left: "-100%" },
+          "100%": { left: "100%" },
+        },
       },
       animation: {
         fadeInPage: "fadeInPage 1s ease-in-out forwards",
+        shine: "shine 0.5s ease-out forwards",
       },
     },
   },

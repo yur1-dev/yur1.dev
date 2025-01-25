@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import clsx from "clsx";
 import Link from "next/link";
-import { Button } from "@/components/ui/button"; // Assuming you're using a Button component from your UI library
+import { Button } from "@/components/ui/button";
 
 const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -25,6 +25,15 @@ const Navbar: React.FC = () => {
           <NavItem href="/projects">Projects</NavItem>
           <NavItem href="/contacts">Contacts</NavItem>
         </ul>
+
+        {/* Download CV Button for Desktop */}
+        <div className="hidden md:block">
+          <Button className="rounded" variant="secondary">
+            <a className="text-sm font-semibold" href="#">
+              Download CV
+            </a>
+          </Button>
+        </div>
 
         {/* Mobile Menu Toggle */}
         <button
@@ -88,7 +97,7 @@ const Navbar: React.FC = () => {
           <NavItem href="/contacts">Contacts</NavItem>
         </ul>
 
-        {/* Download CV Button */}
+        {/* Download CV Button for Mobile */}
         <div className="mt-8">
           <Button className="rounded" variant="secondary">
             <a className="text-sm font-semibold" href="#">
