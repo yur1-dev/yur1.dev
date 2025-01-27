@@ -14,14 +14,12 @@
   }
 }
 
-/* Add these new styles */
 html,
 body {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
-  overflow-y: auto; /* Allow vertical scroll only if needed */
+  overflow-y: auto; /* Allow vertical scrolling */
 }
 
 body {
@@ -48,7 +46,7 @@ body.loading::-webkit-scrollbar {
 /* Show scrollbar and hide loader after loading */
 html.loaded,
 body.loaded {
-  overflow: auto; /* Show scrollbar after loading */
+  overflow-y: auto; /* Show vertical scrollbar after loading */
 }
 
 * {
