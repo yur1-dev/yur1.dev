@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import Image from "next/image";
+import Link from "next/link"; // Import Link for client-side navigation
 
 const Page = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -30,7 +31,7 @@ const Page = () => {
         }, 0);
       });
     }
-  }, [isLoading]);
+  }, [isLoading, imageLoaded]); // Added imageLoaded to dependencies
 
   return (
     <>
@@ -57,7 +58,7 @@ const Page = () => {
                 key={index}
                 className={`group relative flex-shrink-0 h-[25vh] sm:h-full w-full sm:w-1/4 cursor-pointer overflow-hidden transform ${
                   imageLoaded[index] ? "translate-y-0" : "translate-y-[-100%]"
-                } transition-all duration-[1000ms] ease-in-out`}
+                } transition-all duration-&lsqb;1000ms&rsqb; ease-in-out`} // Fixed Tailwind class
                 style={{
                   transitionDuration: `${1000 + index * 300}ms`,
                 }}
@@ -72,7 +73,6 @@ const Page = () => {
                       : "sm:grayscale sm:group-hover:grayscale-0"
                   } group-hover:scale-105`}
                 />
-                {/* Updated label container for mobile */}
                 <div className="absolute bottom-0 left-0 w-1/2 sm:w-full bg-black/80 transform sm:translate-y-full sm:group-hover:translate-y-0 transition-all duration-500 ease-in-out">
                   <div className="p-4 sm:p-6 text-left sm:text-center">
                     <h3 className="text-xl sm:text-2xl font-bold text-white">
