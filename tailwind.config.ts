@@ -31,13 +31,31 @@ export default {
           },
         },
         shine: {
-          "0%": { left: "-100%" },
-          "100%": { left: "100%" },
+          "0%": {
+            left: "-150%",
+            backgroundPosition: "100% 50%",
+            transform: "skewX(-30deg)", // Diagonal angle for shine
+            opacity: "0.8", // Brighter shine at the start
+          },
+          "100%": {
+            left: "150%",
+            backgroundPosition: "0% 50%",
+            transform: "skewX(-30deg)",
+            opacity: "1", // Full brightness at the end
+          },
+        },
+        gradientBlink: {
+          "0%, 100%": { "background-position": "0% 50%" },
+          "50%": { "background-position": "100% 50%" },
         },
       },
       animation: {
         fadeInPage: "fadeInPage 1s ease-in-out forwards",
-        shine: "shine 0.5s ease-out forwards",
+        shine: "shine 2s ease-out infinite", // Adjusted for smoother shine
+        gradientBlink: "gradientBlink 6s ease infinite",
+      },
+      backgroundSize: {
+        "400%": "400% 400%", // Large size for smooth gradient effect
       },
     },
   },

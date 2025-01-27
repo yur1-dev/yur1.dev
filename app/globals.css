@@ -31,6 +31,26 @@ body {
   position: relative;
 }
 
+/* Hide scrollbar and show loader by default */
+html.loading,
+body.loading {
+  overflow: hidden; /* Hide scrollbar during loading */
+  height: 100%; /* Ensure the body takes full height */
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar in IE/Edge */
+}
+
+html.loading::-webkit-scrollbar,
+body.loading::-webkit-scrollbar {
+  display: none; /* Hide scrollbar in WebKit browsers (Chrome, Safari) */
+}
+
+/* Show scrollbar and hide loader after loading */
+html.loaded,
+body.loaded {
+  overflow: auto; /* Show scrollbar after loading */
+}
+
 * {
   box-sizing: border-box;
 }

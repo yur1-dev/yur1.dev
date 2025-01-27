@@ -28,7 +28,8 @@ const Hero: React.FC = () => {
           id="loading-screen"
           className="fixed w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50"
         >
-          <h1 className="text-white text-3xl">Loading...</h1>
+          {/* Spinner for Loading */}
+          <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}
 

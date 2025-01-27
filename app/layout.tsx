@@ -19,8 +19,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${blinker.className} antialiased`}>{children}</body>
+    <html lang="en" className="loading">
+      <body className={`${blinker.className} antialiased loading`}>
+        {children}
+      </body>
     </html>
   );
 }

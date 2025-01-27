@@ -12,15 +12,40 @@ const Navbar: React.FC = () => {
     document.body.style.overflow = isMobileMenuOpen ? "hidden" : "auto";
   }, [isMobileMenuOpen]);
 
+  // Function to handle smooth scrolling or navigation
+  const handleNavigation = (href: string) => {
+    if (href === "/") {
+      // For the homepage, do nothing to avoid reloading.
+      window.location.hash = ""; // Reset the hash if it's already on the homepage
+    } else if (href.startsWith("#")) {
+      // Scroll to the section if it's a hash link
+      const element = document.getElementById(href.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+        // Update the URL without triggering a reload
+        window.location.hash = href;
+      }
+    } else {
+      // For other links, use Next.js internal navigation
+      window.history.pushState({}, "", href); // Change the URL without reloading
+    }
+
+    setIsMobileMenuOpen(false); // Close mobile menu after clicking a link
+  };
+
   return (
     <nav className="w-full px-4">
       <div className="max-w-[900px] mx-auto py-4 flex justify-between items-center">
         {/* Logo */}
-        <h1 className="text-3xl md:text-5xl font-bold text-white">yur1.dev</h1>
+        <h1 className="text-3xl md:text-5xl font-bold text-white">
+          <a href="/">yur1.dev</a>
+        </h1>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex items-center gap-8 text-white">
-          <NavItem href="/">Intro</NavItem>
+          <NavItem href="/" onClick={() => handleNavigation("/")}>
+            Intro
+          </NavItem>
           <NavItem href="/experience">Experience</NavItem>
           <NavItem href="/projects">Projects</NavItem>
           <NavItem href="/contacts">Contacts</NavItem>
@@ -91,7 +116,9 @@ const Navbar: React.FC = () => {
 
         {/* Navigation Links */}
         <ul className="flex flex-col gap-6 text-center text-2xl font-semibold">
-          <NavItem href="/">Intro</NavItem>
+          <NavItem href="/" onClick={() => handleNavigation("/")}>
+            Intro
+          </NavItem>
           <NavItem href="/experience">Experience</NavItem>
           <NavItem href="/projects">Projects</NavItem>
           <NavItem href="/contacts">Contacts</NavItem>
@@ -110,13 +137,16 @@ const Navbar: React.FC = () => {
   );
 };
 
-const NavItem: React.FC<{ href: string; children: React.ReactNode }> = ({
-  href,
-  children,
-}) => (
+// Updated NavItem component to include onClick
+const NavItem: React.FC<{
+  href: string;
+  children: React.ReactNode;
+  onClick?: () => void;
+}> = ({ href, children, onClick }) => (
   <li>
     <Link
       href={href}
+      onClick={onClick}
       className="cursor-pointer hover:text-gray-300 transition-colors"
     >
       {children}
