@@ -8,47 +8,40 @@ import { Button } from "@/components/ui/button";
 const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Manage body overflow for mobile menu
   useEffect(() => {
-    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "auto";
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : prevOverflow;
+    return () => {
+      document.body.style.overflow = prevOverflow; // Reset on cleanup
+    };
   }, [isMobileMenuOpen]);
-
-  // Function to handle smooth scrolling or navigation
-  const handleNavigation = (href: string) => {
-    if (href === "/") {
-      // For the homepage, do nothing to avoid reloading.
-      window.location.hash = ""; // Reset the hash if it's already on the homepage
-    } else if (href.startsWith("#")) {
-      // Scroll to the section if it's a hash link
-      const element = document.getElementById(href.substring(1));
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-        // Update the URL without triggering a reload
-        window.location.hash = href;
-      }
-    } else {
-      // For other links, use Next.js internal navigation
-      window.history.pushState({}, "", href); // Change the URL without reloading
-    }
-
-    setIsMobileMenuOpen(false); // Close mobile menu after clicking a link
-  };
 
   return (
     <nav className="w-full px-4">
       <div className="max-w-[900px] mx-auto py-4 flex justify-between items-center">
         {/* Logo */}
         <h1 className="text-3xl md:text-5xl font-bold text-white">
-          <a href="/">yur1.dev</a>
+          <Link href="/">yur1.dev</Link>
         </h1>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex items-center gap-8 text-white">
-          <NavItem href="/" onClick={() => handleNavigation("/")}>
+          <NavItem href="/" onClick={() => setIsMobileMenuOpen(false)}>
             Intro
           </NavItem>
-          <NavItem href="/experience">Experience</NavItem>
-          <NavItem href="/projects">Projects</NavItem>
-          <NavItem href="/contacts">Contacts</NavItem>
+          <NavItem
+            href="/experience"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Experience
+          </NavItem>
+          <NavItem href="/projects" onClick={() => setIsMobileMenuOpen(false)}>
+            Projects
+          </NavItem>
+          <NavItem href="/contacts" onClick={() => setIsMobileMenuOpen(false)}>
+            Contacts
+          </NavItem>
         </ul>
 
         {/* Download CV Button for Desktop */}
@@ -116,12 +109,21 @@ const Navbar: React.FC = () => {
 
         {/* Navigation Links */}
         <ul className="flex flex-col gap-6 text-center text-2xl font-semibold">
-          <NavItem href="/" onClick={() => handleNavigation("/")}>
+          <NavItem href="/" onClick={() => setIsMobileMenuOpen(false)}>
             Intro
           </NavItem>
-          <NavItem href="/experience">Experience</NavItem>
-          <NavItem href="/projects">Projects</NavItem>
-          <NavItem href="/contacts">Contacts</NavItem>
+          <NavItem
+            href="/experience"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Experience
+          </NavItem>
+          <NavItem href="/projects" onClick={() => setIsMobileMenuOpen(false)}>
+            Projects
+          </NavItem>
+          <NavItem href="/contacts" onClick={() => setIsMobileMenuOpen(false)}>
+            Contacts
+          </NavItem>
         </ul>
 
         {/* Download CV Button for Mobile */}

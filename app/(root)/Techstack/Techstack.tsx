@@ -56,13 +56,14 @@ const Techstack: React.FC = () => {
       { threshold: 0.8 }
     );
 
-    if (techStackRef.current) {
-      observer.observe(techStackRef.current);
+    const currentRef = techStackRef.current; // Copy ref value to a variable
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (techStackRef.current) {
-        observer.unobserve(techStackRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
