@@ -121,7 +121,7 @@ const Portfolio: React.FC = () => {
   };
 
   useEffect(() => {
-    const currentRef = observerRef.current;
+    const currentRef = observerRef.current; // Store ref value in a variable
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
@@ -144,6 +144,7 @@ const Portfolio: React.FC = () => {
   }, [hasAnimated]);
 
   useEffect(() => {
+    const currentRef = observerRef.current; // Store ref value in a variable
     const titleObserver = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
@@ -154,13 +155,13 @@ const Portfolio: React.FC = () => {
       { threshold: 0.8 }
     );
 
-    if (observerRef.current) {
-      titleObserver.observe(observerRef.current);
+    if (currentRef) {
+      titleObserver.observe(currentRef);
     }
 
     return () => {
-      if (observerRef.current) {
-        titleObserver.unobserve(observerRef.current);
+      if (currentRef) {
+        titleObserver.unobserve(currentRef);
       }
     };
   }, []);
