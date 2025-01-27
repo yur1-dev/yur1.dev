@@ -13,16 +13,17 @@ const Footer = () => {
           setIsFooterVisible(true);
         }
       },
-      { threshold: 0.5 } // Trigger when 10% of the footer is visible
+      { threshold: 0.5 }
     );
 
-    if (footerRef.current) {
-      observer.observe(footerRef.current);
+    const currentRef = footerRef.current; // Copy ref value to a variable
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (footerRef.current) {
-        observer.unobserve(footerRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
