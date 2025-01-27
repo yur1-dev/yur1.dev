@@ -36,11 +36,15 @@ export default function Home() {
       };
     } else {
       setIsLoading(false);
+      document.documentElement.classList.remove("loading");
+      document.body.classList.remove("loading");
+      document.documentElement.classList.add("loaded");
+      document.body.classList.add("loaded");
     }
   }, []);
 
   return (
-    <main className="relative w-full min-h-screen overflow-auto">
+    <main className="relative w-full min-h-screen overflow-hidden">
       {/* Full-page loader overlay */}
       {isLoading && (
         <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center">
