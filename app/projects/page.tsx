@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import Image from "next/image";
-import Link from "next/link"; // Import Link for client-side navigation
 
 const Page = () => {
   const [isLoading, setIsLoading] = useState(true);
