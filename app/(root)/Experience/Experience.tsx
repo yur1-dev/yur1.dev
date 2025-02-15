@@ -36,7 +36,7 @@ const Experience = () => {
     {
       id: 1,
       image: "/au-study.png",
-      duration: "2019 - 2023",
+      duration: "2024 - Present",
       institution: "PHINMA-Araullo University",
       degree: "Bachelor of Science in Information Technology",
       details: "Focused on web technologies and software development.",

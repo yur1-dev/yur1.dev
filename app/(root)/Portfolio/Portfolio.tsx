@@ -90,7 +90,7 @@ const Portfolio: React.FC = () => {
       technologies: ["Next", "TS", "Tailwind", "React"],
       learnMoreLink: "#",
       fullDetails:
-        "Solana Vibe Station is your go-to platform for accessing fast, secure, and scalable Solana RPC endpoints. Enjoy a robust developer experience with a user-friendly dashboard and rich Markdown documentation.",
+        "Solana Vibe Station is your go-to platform for accessing fast, secure, and scalable Solana RPC endpoints.",
       galleryImages: ["/svs-hero.png", "/images/project1-3.png"],
       features: [
         "Secure Authentication",
@@ -109,7 +109,7 @@ const Portfolio: React.FC = () => {
       technologies: ["React", "Tailwind", "Next"],
       learnMoreLink: "#",
       fullDetails:
-        "PumpBot is a comprehensive platform that lets you launch coins, manage your wallet securely, subscribe for exclusive features, and automate volume trading with bundle wallets.",
+        "PumpBot is a comprehensive platform that lets you launch coins, manage your wallet securely, subscribe for exclusive features.",
       galleryImages: ["/pumpbot-hero.png", "/project2-2.png"],
       features: [
         "Instant Coin Launch",
