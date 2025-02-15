@@ -57,19 +57,37 @@ const Footer = () => {
                 <a href="">About</a>
               </li>
               <li className="cursor-pointer opacity-60 font-light transition-all duration-1000 hover:opacity-100">
-                <a href="">Portfolio</a>
+                <a href="/projects">Projects</a>
               </li>
             </ul>
             <ul>
               <span className="block font-medium text-lg mb-2">Connect</span>
               <li className="cursor-pointer opacity-60 font-light transition-all duration-1000 hover:opacity-100">
-                <a href="">Email</a>
+                <a
+                  href="https://t.me/yuri_roc"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Telegram
+                </a>
               </li>
               <li className="cursor-pointer opacity-60 font-light transition-all duration-1000 hover:opacity-100">
-                <a href="">Github</a>
+                <a
+                  href="https://github.com/yur1-dev"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Github
+                </a>
               </li>
               <li className="cursor-pointer opacity-60 font-light transition-all duration-1000 hover:opacity-100">
-                <a href="">LinkedIn</a>
+                <a
+                  href="https://www.linkedin.com/in/yuri-esber-9422b1227/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  LinkedIn
+                </a>
               </li>
             </ul>
           </div>
@@ -77,7 +95,7 @@ const Footer = () => {
 
         {/* Footer Bottom Section */}
         <div className="mt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
-          <p>© 2024</p>
+          <p>© {new Date().getFullYear()}</p>
           <p>@yur1.dev</p>
         </div>
       </div>

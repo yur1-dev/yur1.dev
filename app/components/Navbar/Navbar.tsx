@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import clsx from "clsx";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 const Navbar: React.FC = () => {
@@ -17,12 +18,36 @@ const Navbar: React.FC = () => {
     };
   }, [isMobileMenuOpen]);
 
+  // Smoothly scroll if we're on "/" already; otherwise let Next.js handle the route
+  const handleExperienceClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (window.location.pathname === "/") {
+      e.preventDefault();
+      document
+        .getElementById("experience")
+        ?.scrollIntoView({ behavior: "smooth" });
+      setIsMobileMenuOpen(false);
+    } else {
+      // If on another page, let Next.js navigate to /#experience
+      setIsMobileMenuOpen(false);
+    }
+  };
+
   return (
     <nav className="w-full px-4">
-      <div className="max-w-[900px] mx-auto py-4 flex justify-between items-center">
-        {/* Logo */}
-        <h1 className="text-3xl md:text-5xl font-bold text-white">
+      <div className="max-w-[900px] mx-auto py-4 flex justify-between items-center relative">
+        {/* Logo with animated GIF */}
+        <h1 className="relative text-3xl md:text-5xl font-bold text-white">
           <Link href="/">yur1.dev</Link>
+          {/* Position the larger GIF near or overlapping the text */}
+          <div className="absolute -top-2 -right-8">
+            <Image
+              src="/pixel-cat.gif"
+              alt="Pixel Cat"
+              width={38}
+              height={38}
+              className="rounded-full"
+            />
+          </div>
         </h1>
 
         {/* Desktop Menu */}
@@ -30,18 +55,15 @@ const Navbar: React.FC = () => {
           <NavItem href="/" onClick={() => setIsMobileMenuOpen(false)}>
             Intro
           </NavItem>
-          <NavItem
-            href="/experience"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
+          <NavItem href="/#experience" onClick={handleExperienceClick}>
             Experience
           </NavItem>
           <NavItem href="/projects" onClick={() => setIsMobileMenuOpen(false)}>
             Projects
           </NavItem>
-          <NavItem href="/contacts" onClick={() => setIsMobileMenuOpen(false)}>
+          {/* <NavItem href="/contacts" onClick={() => setIsMobileMenuOpen(false)}>
             Contacts
-          </NavItem>
+          </NavItem> */}
         </ul>
 
         {/* Download CV Button for Desktop */}
@@ -107,23 +129,20 @@ const Navbar: React.FC = () => {
           </svg>
         </button>
 
-        {/* Navigation Links */}
+        {/* Mobile Navigation Links */}
         <ul className="flex flex-col gap-6 text-center text-2xl font-semibold">
           <NavItem href="/" onClick={() => setIsMobileMenuOpen(false)}>
             Intro
           </NavItem>
-          <NavItem
-            href="/experience"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
+          <NavItem href="/#experience" onClick={handleExperienceClick}>
             Experience
           </NavItem>
           <NavItem href="/projects" onClick={() => setIsMobileMenuOpen(false)}>
             Projects
           </NavItem>
-          <NavItem href="/contacts" onClick={() => setIsMobileMenuOpen(false)}>
+          {/* <NavItem href="/contacts" onClick={() => setIsMobileMenuOpen(false)}>
             Contacts
-          </NavItem>
+          </NavItem> */}
         </ul>
 
         {/* Download CV Button for Mobile */}
@@ -139,12 +158,13 @@ const Navbar: React.FC = () => {
   );
 };
 
-// Updated NavItem component to include onClick
-const NavItem: React.FC<{
+interface NavItemProps {
   href: string;
   children: React.ReactNode;
-  onClick?: () => void;
-}> = ({ href, children, onClick }) => (
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+}
+
+const NavItem: React.FC<NavItemProps> = ({ href, children, onClick }) => (
   <li>
     <Link
       href={href}

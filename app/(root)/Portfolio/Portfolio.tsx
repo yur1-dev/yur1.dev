@@ -89,24 +89,40 @@ const Portfolio: React.FC = () => {
       description: "Your Solana RPC Gateway",
       technologies: ["Next", "TS", "Tailwind", "React"],
       learnMoreLink: "#",
-      fullDetails: "Solana Vibe Station: Your Solana RPCs Gateway",
+      fullDetails:
+        "Solana Vibe Station is your go-to platform for accessing fast, secure, and scalable Solana RPC endpoints. Enjoy a robust developer experience with a user-friendly dashboard and rich Markdown documentation.",
       galleryImages: ["/svs-hero.png", "/images/project1-3.png"],
-      features: ["Authentication", "Rich Markdown Support"],
+      features: [
+        "Secure Authentication",
+        "Lightning-Fast RPC Endpoints",
+        "Scalable & Reliable Infrastructure",
+        "User-Friendly Dashboard",
+        "Rich Markdown Documentation",
+      ],
       githubLink: "https://github.com/example/project1",
-      liveDemoLink: "https://example.com/project1",
+      liveDemoLink: "https://www.solanavibestation.com/",
     },
     {
-      imageSrc: "/project2-image.png",
-      title: "Project 2",
-      description: "Another amazing project",
-      technologies: ["React", "Tailwind", "Node.js"],
+      imageSrc: "/pumpbot-hero.png",
+      title: "PumpBot",
+      description: "The fastest way to launch and manage your assets.",
+      technologies: ["React", "Tailwind", "Next"],
       learnMoreLink: "#",
-      fullDetails: "Project 2: A detailed description of the project.",
-      galleryImages: ["/project2-1.png", "/project2-2.png"],
-      features: ["Feature 1", "Feature 2"],
+      fullDetails:
+        "PumpBot is a comprehensive platform that lets you launch coins, manage your wallet securely, subscribe for exclusive features, and automate volume trading with bundle wallets.",
+      galleryImages: ["/pumpbot-hero.png", "/project2-2.png"],
+      features: [
+        "Instant Coin Launch",
+        "Secure Wallet Generation",
+        "Subscription & Payment Handling",
+        "Bundle Wallet Distribution",
+        "Automated Volume Trading Bots",
+        "Real-time SOL Balance Refresh",
+      ],
       githubLink: "https://github.com/example/project2",
-      liveDemoLink: "https://example.com/project2",
+      liveDemoLink: "https://pump-bot-five.vercel.app/",
     },
+
     // Add more projects as needed
   ];
 

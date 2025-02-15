@@ -20,9 +20,9 @@ const techStackData = [
     alt: "Tailwind CSS",
   },
   {
-    name: "Node.js",
-    src: "/nodejs.svg",
-    alt: "Node.js",
+    name: "Dexscreener",
+    src: "/dexscreener.png",
+    alt: "Dexscreener",
   },
   {
     name: "TypeScript",

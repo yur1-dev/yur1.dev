@@ -1,14 +1,14 @@
+"use client";
 import React from "react";
 import "../Styles/styles.css";
 
-const Cgradients = () => {
+export default function Cgradients() {
   return (
-    <div className="circle-container">
-      <div className="circle-gradient circle-1"></div>
-      <div className="circle-gradient circle-2"></div>
-      <div className="circle-gradient circle-3"></div>
-    </div>
+    <>
+      {/* Each circle is absolutely or fixed-positioned in the CSS */}
+      <div className="circle-gradient circle-1" />
+      <div className="circle-gradient circle-2" />
+      <div className="circle-gradient circle-3" />
+    </>
   );
-};
-
-export default Cgradients;
+}

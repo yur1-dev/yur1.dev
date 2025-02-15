@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="loading">
+    <html lang="en" className="scroll-smooth overflow-x-hidden loading">
       <body className={`${blinker.className} antialiased loading`}>
         {children}
       </body>

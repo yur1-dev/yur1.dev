@@ -1,13 +1,16 @@
-import { FaGithub, FaLinkedin, FaTelegramPlane } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaBehance } from "react-icons/fa";
 
 export default function Social() {
   return (
     <div className="flex justify-center space-x-4">
       {[
-        { href: "https://github.com/Rii1126", Icon: FaGithub },
-        { href: "https://t.me/zeyubh", Icon: FaTelegramPlane },
+        { href: "https://github.com/yur1-dev", Icon: FaGithub },
         {
-          href: "https://www.linkedin.com/in/marc-yuri-esber-9422b1227/",
+          href: "https://www.behance.net/marcyuriesber",
+          Icon: FaBehance,
+        },
+        {
+          href: "https://www.linkedin.com/in/yuri-esber-9422b1227/",
           Icon: FaLinkedin,
         },
       ].map(({ href, Icon }, index) => (

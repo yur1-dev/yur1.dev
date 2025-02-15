@@ -8,7 +8,12 @@ const Page = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [imageLoaded, setImageLoaded] = useState([false, false, false, false]);
 
-  const projectNames = ["Project 1", "Project 2", "Project 3", "Project 4"];
+  const projectNames = [
+    "PUMPBOT",
+    "Solana Vibe Station",
+    "PUP ON SOL",
+    "Old Portfolio",
+  ];
 
   useEffect(() => {
     const loadTimer = setTimeout(() => {
@@ -30,7 +35,7 @@ const Page = () => {
         }, 0);
       });
     }
-  }, [isLoading, imageLoaded]); // Added imageLoaded to dependencies
+  }, [isLoading, imageLoaded]);
 
   return (
     <>
@@ -57,7 +62,7 @@ const Page = () => {
                 key={index}
                 className={`group relative flex-shrink-0 h-[25vh] sm:h-full w-full sm:w-1/4 cursor-pointer overflow-hidden transform ${
                   imageLoaded[index] ? "translate-y-0" : "translate-y-[-100%]"
-                } transition-all duration-&lsqb;1000ms&rsqb; ease-in-out`} // Fixed Tailwind class
+                } transition-all duration-[1000ms] ease-in-out`}
                 style={{
                   transitionDuration: `${1000 + index * 300}ms`,
                 }}
@@ -68,7 +73,7 @@ const Page = () => {
                   fill
                   className={`object-cover transition-all duration-500 ease-in-out ${
                     index === 0
-                      ? "opacity-50 grayscale-0"
+                      ? "opacity-50 group-hover:opacity-100 grayscale-0"
                       : "sm:grayscale sm:group-hover:grayscale-0"
                   } group-hover:scale-105`}
                 />

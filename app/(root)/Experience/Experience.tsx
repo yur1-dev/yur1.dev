@@ -8,54 +8,54 @@ const Experience = () => {
   const workData = [
     {
       id: 1,
-      image: "/svs-experience.png",
-      duration: "Jan 2023 - Present",
-      company: "Digital Perspective",
+      image: "/pumpbot-experience.png",
+      duration: "Jan 2024 - Sept 2024",
+      company: "PUMPBOT",
       role: "Frontend Web Developer",
-      skills: "Web Design; Web Development; WordPress + Elementor.",
+      skills: "Fullstack Web Developer; Figma; Web Design.",
     },
     {
       id: 2,
-      image: "/svs-experience-2.png",
-      duration: "Feb 2021 - Dec 2022",
-      company: "Creative Solutions",
-      role: "UI/UX Designer",
-      skills: "UI/UX Design; Figma; Adobe XD; Prototyping.",
+      image: "/svs-experience.png",
+      duration: "Nov 2023 - Dec 2023",
+      company: "Solana Vibe Station",
+      role: "Frontend Web Developer",
+      skills: "Web Design; Web Development.",
     },
     {
       id: 3,
-      image: "/svs-experience-3.png",
-      duration: "Mar 2019 - Jan 2021",
-      company: "Tech Innovators",
+      image: "/puponsol-experience.png",
+      duration: "Mar 2023 - July 2023",
+      company: "PUP ON SOL",
       role: "Web Developer",
-      skills: "React; JavaScript; Node.js; MongoDB.",
+      skills: "HTML; Tailwindcss; JavaScript.",
     },
   ];
 
   const studiesData = [
     {
       id: 1,
-      image: "/study-1.png",
+      image: "/au-study.png",
       duration: "2019 - 2023",
-      institution: "University of Tech",
-      degree: "Bachelor's in Computer Science",
+      institution: "PHINMA-Araullo University",
+      degree: "Bachelor of Science in Information Technology",
       details: "Focused on web technologies and software development.",
     },
     {
       id: 2,
-      image: "/study-2.png",
+      image: "/maliwalo-study.png",
       duration: "2017 - 2019",
       institution: "High Tech Academy",
-      degree: "Diploma in Web Development",
-      details: "Specialized in front-end and back-end web technologies.",
+      degree: "Diploma in Senior High School",
+      details: "Specialized in front-end",
     },
     {
       id: 3,
-      image: "/study-3.png",
+      image: "/scholastica-study.png",
       duration: "2015 - 2017",
-      institution: "Tech High School",
+      institution: "Scholastica de Leau Mer Academy",
       degree: "High School Diploma",
-      details: "Basic programming and technology courses.",
+      details: "Basic programming and minor subjects",
     },
   ];
 
@@ -64,14 +64,13 @@ const Experience = () => {
 
   useEffect(() => {
     const targetElement = experienceRef.current;
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true); // Show content when it's in view
+          setIsVisible(true); // Reveal content when in view
         }
       },
-      { threshold: 0.5 } // Trigger when 50% of the element is in the viewport
+      { threshold: 0.5 }
     );
 
     if (targetElement) {
@@ -86,14 +85,14 @@ const Experience = () => {
   }, []);
 
   return (
-    <div className="w-full px-4">
+    // The id="experience" is crucial for the navbar's /#experience link
+    <div id="experience" className="w-full px-4">
       <div
         ref={experienceRef}
         className={`max-w-[900px] mx-auto my-12 transform transition-all duration-1000 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         }`}
       >
-        {/* Title Animation: Slide from top to bottom */}
         <h1
           className={`text-4xl font-semibold mb-6 text-center sm:text-left transform transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -118,7 +117,7 @@ const Experience = () => {
             </TabsTrigger>
           </TabsList>
 
-          {/* Work Tab */}
+          {/* Work Tab Content */}
           <TabsContent value="work">
             <div
               className={`space-y-4 border border-[#D9D9D9] p-4 rounded-xl ${
@@ -130,7 +129,7 @@ const Experience = () => {
               {workData.map((item) => (
                 <div
                   key={item.id}
-                  className={`page-transition flex flex-col sm:flex-col md:flex-row items-center sm:items-start sm:space-x-8 p-6 rounded-lg shadow-md ${
+                  className={`page-transition flex flex-col md:flex-row items-center sm:items-start sm:space-x-8 p-6 rounded-lg shadow-md ${
                     isVisible
                       ? "opacity-100 translate-y-0"
                       : "opacity-0 translate-y-8"
@@ -152,7 +151,6 @@ const Experience = () => {
                     <p className="text-lg font-semibold">{item.duration}</p>
                     <p className="text-xl font-semibold">{item.company}</p>
                     <p className="text-lg">{item.role}</p>
-
                     <p className="text-sm text-gray-400 mt-2">{item.skills}</p>
                   </div>
                 </div>
@@ -160,7 +158,7 @@ const Experience = () => {
             </div>
           </TabsContent>
 
-          {/* Studies Tab */}
+          {/* Studies Tab Content */}
           <TabsContent value="studies">
             <div
               className={`space-y-4 border border-[#D9D9D9] p-4 rounded-xl ${
@@ -172,12 +170,13 @@ const Experience = () => {
               {studiesData.map((item) => (
                 <div
                   key={item.id}
-                  className={`page-transition flex flex-col sm:flex-col md:flex-row items-center sm:items-start space-x- sm:space-x-8 p-6 rounded-lg shadow-md ${
+                  className={`page-transition flex flex-col md:flex-row items-center sm:items-start sm:space-x-8 p-6 rounded-lg shadow-md ${
                     isVisible
                       ? "opacity-100 translate-y-0"
                       : "opacity-0 translate-y-8"
                   }`}
                 >
+                  {/* Circular Image */}
                   <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-800 flex items-center justify-center">
                     <Image
                       src={item.image}
@@ -188,11 +187,11 @@ const Experience = () => {
                     />
                   </div>
 
+                  {/* Study Details */}
                   <div className="text-center sm:text-left">
                     <p className="text-lg font-semibold">{item.duration}</p>
                     <p className="text-xl font-semibold">{item.institution}</p>
                     <p className="text-lg">{item.degree}</p>
-
                     <p className="text-sm text-gray-400 mt-2">{item.details}</p>
                   </div>
                 </div>

@@ -1,24 +1,33 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import Socials from "@/app/components/Socials/Socials";
-import { FaMapPin } from "react-icons/fa";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import Socials from "@/app/components/Socials/Socials";
+import { FaMapPin, FaTimes } from "react-icons/fa";
 
 const Hero: React.FC = () => {
   const [isHeroVisible, setIsHeroVisible] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Handle page load animation for Hero section (bottom to top)
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
       setIsHeroVisible(true);
-    }, 1500); // Set a duration for the loading screen (1.5 seconds)
+    }, 1500); // 1.5 seconds loading duration
 
     return () => clearTimeout(timer);
   }, []);
+
+  const handleHireMeClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <>
@@ -28,7 +37,6 @@ const Hero: React.FC = () => {
           id="loading-screen"
           className="fixed w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50"
         >
-          {/* Spinner for Loading */}
           <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}
@@ -56,7 +64,7 @@ const Hero: React.FC = () => {
                   I&apos;m a 23-year-old Frontend Developer. I have been
                   programming
                   <br className="hidden sm:block" />
-                  for more than 5 years. I create professional websites.
+                  for more than 3 years. I create professional websites.
                 </p>
 
                 {/* Socials on larger screens */}
@@ -64,10 +72,11 @@ const Hero: React.FC = () => {
                   <Socials />
                 </div>
                 <div>
-                  <Button className="rounded bg-secondary border-[1px] text-white">
-                    <a className="text-sm font-semibold" href="">
-                      Hire me
-                    </a>
+                  <Button
+                    onClick={handleHireMeClick}
+                    className="rounded bg-secondary border-[1px] text-white"
+                  >
+                    <span className="text-sm font-semibold">Hire me</span>
                   </Button>
                 </div>
               </div>
@@ -93,6 +102,52 @@ const Hero: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Modal for Telegram Contact */}
+      {isModalOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+          onClick={handleModalClose}
+        >
+          <div
+            className="bg-black bg-opacity-90 p-6 rounded-xl border border-gray-700 relative max-w-sm w-full mx-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              className="absolute top-2 right-2 text-gray-300 hover:text-white text-xl"
+              onClick={handleModalClose}
+            >
+              <FaTimes />
+            </button>
+
+            {/* Modal Text */}
+            <h2 className="text-2xl text-white mb-4">
+              Let&apos;s Chat on Telegram!
+            </h2>
+            <p className="text-gray-300 mb-6">
+              I&apos;m excited to hear from you! You can reach out to me
+              directly on Telegram.
+            </p>
+            <a
+              href="https://t.me/yuri_roc"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button className="bg-secondary border-[1px] text-white">
+                Chat on Telegram
+              </Button>
+            </a>
+
+            {/* Cat in the bottom-right corner (larger size) */}
+            <img
+              src="/pixel-cat.gif"
+              alt="Pixel Cat Animation"
+              className="w-16 h-16 absolute bottom-2 right-2"
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 };
