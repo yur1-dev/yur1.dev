@@ -39,6 +39,11 @@ const techStackData = [
     src: "/shadcn.svg",
     alt: "Shadcn UI",
   },
+  {
+    name: "Node.js",
+    src: "/nodejs.png",
+    alt: "Node.js",
+  },
 ];
 
 const Techstack: React.FC = () => {
