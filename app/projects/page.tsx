@@ -9,8 +9,11 @@ const Page = () => {
   const [imageLoaded, setImageLoaded] = useState([false, false, false, false]);
 
   const projectData = [
-    { name: "PUMPBOT", link: "#" },
-    { name: "Solana Vibe Station", link: "#" },
+    { name: "PUMPBOT", link: "https://pump-bot-five.vercel.app/" },
+    {
+      name: "Solana Vibe Station",
+      link: "https://solanavibestation.vercel.app/",
+    },
     { name: "PUP ON SOL", link: "https://puponsol.vercel.app/" },
     { name: "Old Portfolio", link: "#" },
   ];

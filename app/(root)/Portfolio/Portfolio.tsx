@@ -109,8 +109,8 @@ const Portfolio: React.FC = () => {
         "User-Friendly Dashboard",
         "Rich Markdown Documentation",
       ],
-      githubLink: "https://github.com/example/project1",
-      liveDemoLink: "https://www.solanavibestation.com/",
+      githubLink: "https://github.com/yur1-dev/svs-website",
+      liveDemoLink: "https://solanavibestation.vercel.app/",
     },
     {
       imageSrc: "/pumpbot-hero.png",
@@ -129,7 +129,7 @@ const Portfolio: React.FC = () => {
         "Automated Volume Trading Bots",
         "Real-time SOL Balance Refresh",
       ],
-      githubLink: "https://github.com/example/project2",
+      githubLink: "https://github.com/yur1-dev/pump-bot-landing",
       liveDemoLink: "https://pump-bot-five.vercel.app/",
     },
     // Add more projects as needed
