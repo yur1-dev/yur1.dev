@@ -8,11 +8,11 @@ const Page = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [imageLoaded, setImageLoaded] = useState([false, false, false, false]);
 
-  const projectNames = [
-    "PUMPBOT",
-    "Solana Vibe Station",
-    "PUP ON SOL",
-    "Old Portfolio",
+  const projectData = [
+    { name: "PUMPBOT", link: "#" },
+    { name: "Solana Vibe Station", link: "#" },
+    { name: "PUP ON SOL", link: "https://puponsol.vercel.app/" },
+    { name: "Old Portfolio", link: "#" },
   ];
 
   useEffect(() => {
@@ -52,14 +52,12 @@ const Page = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-0 sm:gap-2 w-full h-screen sm:h-full justify-evenly sm:justify-center items-center absolute top-0 left-0 sm:z-0">
-            {[
-              "/expandable-1.png",
-              "/expandable-2.png",
-              "/expandable-3.png",
-              "/expandable-4.png",
-            ].map((src, index) => (
-              <div
+            {projectData.map((project, index) => (
+              <a
                 key={index}
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`group relative flex-shrink-0 h-[25vh] sm:h-full w-full sm:w-1/4 cursor-pointer overflow-hidden transform ${
                   imageLoaded[index] ? "translate-y-0" : "translate-y-[-100%]"
                 } transition-all duration-[1000ms] ease-in-out`}
@@ -68,7 +66,7 @@ const Page = () => {
                 }}
               >
                 <Image
-                  src={src}
+                  src={`/expandable-${index + 1}.png`}
                   alt={`Card ${index}`}
                   fill
                   className={`object-cover transition-all duration-500 ease-in-out ${
@@ -80,11 +78,11 @@ const Page = () => {
                 <div className="absolute bottom-0 left-0 w-1/2 sm:w-full bg-black/80 transform sm:translate-y-full sm:group-hover:translate-y-0 transition-all duration-500 ease-in-out">
                   <div className="p-4 sm:p-6 text-left sm:text-center">
                     <h3 className="text-xl sm:text-2xl font-bold text-white">
-                      {projectNames[index]}
+                      {project.name}
                     </h3>
                   </div>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </div>
