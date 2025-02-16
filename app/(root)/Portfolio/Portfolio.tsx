@@ -73,6 +73,16 @@ const ProjectCard: React.FC<{
   );
 };
 
+// Custom X Icon built with HTML & Tailwind CSS
+const CustomX: React.FC = () => {
+  return (
+    <div className="relative w-6 h-6">
+      <span className="absolute top-1/2 left-0 w-full h-0.5 bg-white transform -translate-y-1/2 rotate-45"></span>
+      <span className="absolute top-1/2 left-0 w-full h-0.5 bg-white transform -translate-y-1/2 -rotate-45"></span>
+    </div>
+  );
+};
+
 const Portfolio: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState<CardData | null>(null);
@@ -109,7 +119,7 @@ const Portfolio: React.FC = () => {
       technologies: ["React", "Tailwind", "Next"],
       learnMoreLink: "#",
       fullDetails:
-        "PumpBot is a comprehensive platform that lets you launch coins, manage your wallet securely, subscribe for exclusive features.",
+        "PumpBot is a comprehensive platform that lets you launch coins, manage your wallet securely, and subscribe for exclusive features.",
       galleryImages: ["/pumpbot-hero.png", "/project2-2.png"],
       features: [
         "Instant Coin Launch",
@@ -122,7 +132,6 @@ const Portfolio: React.FC = () => {
       githubLink: "https://github.com/example/project2",
       liveDemoLink: "https://pump-bot-five.vercel.app/",
     },
-
     // Add more projects as needed
   ];
 
@@ -137,7 +146,7 @@ const Portfolio: React.FC = () => {
   };
 
   useEffect(() => {
-    const currentRef = observerRef.current; // Store ref value in a variable
+    const currentRef = observerRef.current;
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
@@ -160,7 +169,7 @@ const Portfolio: React.FC = () => {
   }, [hasAnimated]);
 
   useEffect(() => {
-    const currentRef = observerRef.current; // Store ref value in a variable
+    const currentRef = observerRef.current;
     const titleObserver = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
@@ -205,10 +214,11 @@ const Portfolio: React.FC = () => {
               <div className="flex flex-col gap-4">
                 <div className="flex flex-col w-full p-2 px-6 relative">
                   <button
-                    className="absolute top-0 right-0.5 text-white text-xl font-bold"
+                    className="absolute top-2 right-[-2px]"
                     onClick={handleModalClose}
+                    aria-label="Close menu"
                   >
-                    X
+                    <CustomX />
                   </button>
                   {selectedImage && (
                     <Image
