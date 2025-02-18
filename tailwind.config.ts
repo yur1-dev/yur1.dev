@@ -8,6 +8,7 @@ export default {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./features/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  safelist: ["max-w-[900px]", "h-[80vh]", "bg-[rgb(13,13,13)]"],
   theme: {
     extend: {
       colors: {
@@ -34,14 +35,14 @@ export default {
           "0%": {
             left: "-150%",
             backgroundPosition: "100% 50%",
-            transform: "skewX(-30deg)", // Diagonal angle for shine
-            opacity: "0.8", // Brighter shine at the start
+            transform: "skewX(-30deg)",
+            opacity: "0.8",
           },
           "100%": {
             left: "150%",
             backgroundPosition: "0% 50%",
             transform: "skewX(-30deg)",
-            opacity: "1", // Full brightness at the end
+            opacity: "1",
           },
         },
         gradientBlink: {
@@ -51,11 +52,11 @@ export default {
       },
       animation: {
         fadeInPage: "fadeInPage 1s ease-in-out forwards",
-        shine: "shine 2s ease-out infinite", // Adjusted for smoother shine
+        shine: "shine 2s ease-out infinite",
         gradientBlink: "gradientBlink 6s ease infinite",
       },
       backgroundSize: {
-        "400%": "400% 400%", // Large size for smooth gradient effect
+        "400%": "400% 400%",
       },
     },
   },
