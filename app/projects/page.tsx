@@ -26,19 +26,13 @@ const Page = () => {
     return () => clearTimeout(loadTimer);
   }, []);
 
-  useEffect(() => {
-    if (!isLoading) {
-      imageLoaded.forEach((_, index) => {
-        setTimeout(() => {
-          setImageLoaded((prev) => {
-            const newState = [...prev];
-            newState[index] = true;
-            return newState;
-          });
-        }, 0);
-      });
-    }
-  }, [isLoading, imageLoaded]);
+  const handleImageLoad = (index: number) => {
+    setImageLoaded((prev) => {
+      const newState = [...prev];
+      newState[index] = true;
+      return newState;
+    });
+  };
 
   return (
     <>
@@ -72,6 +66,7 @@ const Page = () => {
                   src={`/expandable-${index + 1}.png`}
                   alt={`Card ${index}`}
                   fill
+                  onLoadingComplete={() => handleImageLoad(index)} // Image loaded callback
                   className={`object-cover transition-all duration-500 ease-in-out ${
                     index === 0
                       ? "opacity-50 group-hover:opacity-100 grayscale-0"

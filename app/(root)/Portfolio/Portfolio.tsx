@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
 
 const techIcons = {
   Next: "/nextjs.svg",
@@ -83,14 +84,37 @@ const CustomX: React.FC = () => {
   );
 };
 
+// Framer Motion Variants
+const titleVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.8 } },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 200 },
+  visible: (custom: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, delay: custom * 0.2 },
+  }),
+};
+
+const modalOverlayVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.3 } },
+  exit: { opacity: 0, transition: { duration: 0.3 } },
+};
+
+const modalContentVariants = {
+  hidden: { scale: 0.8, opacity: 0 },
+  visible: { scale: 1, opacity: 1, transition: { duration: 0.3 } },
+  exit: { scale: 0.8, opacity: 0, transition: { duration: 0.3 } },
+};
+
 const Portfolio: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState<CardData | null>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
-  const [isTitleVisible, setIsTitleVisible] = useState(false);
-  const observerRef = useRef<HTMLDivElement>(null);
-  const [hasAnimated, setHasAnimated] = useState(false);
 
   const cardsData: CardData[] = [
     {
@@ -145,134 +169,103 @@ const Portfolio: React.FC = () => {
     setIsModalOpen(false);
   };
 
-  useEffect(() => {
-    const currentRef = observerRef.current;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (entry.isIntersecting && !hasAnimated) {
-          setHasAnimated(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-    };
-  }, [hasAnimated]);
-
-  useEffect(() => {
-    const currentRef = observerRef.current;
-    const titleObserver = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (entry.isIntersecting) {
-          setIsTitleVisible(true);
-        }
-      },
-      { threshold: 0.8 }
-    );
-
-    if (currentRef) {
-      titleObserver.observe(currentRef);
-    }
-
-    return () => {
-      if (currentRef) {
-        titleObserver.unobserve(currentRef);
-      }
-    };
-  }, []);
-
   return (
     <div className="w-full px-4">
       <div className="max-w-[900px] mx-auto my-12 mb-20">
-        <h1
-          className={`text-4xl font-semibold mb-6 transition-opacity duration-500 ${
-            isTitleVisible ? "opacity-100" : "opacity-0"
-          }`}
+        {/* Portfolio Title */}
+        <motion.h1
+          variants={titleVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="text-4xl font-semibold mb-6"
         >
           Portfolio
-        </h1>
+        </motion.h1>
 
-        {isModalOpen && selectedCard && (
-          <div
-            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 flex items-center justify-center z-50"
-            onClick={handleModalClose} // Close modal when clicking outside
-          >
-            <div
-              className="w-full max-w-[700px] bg-[rgb(13,13,13)] text-white border rounded-xl p-4 sm:max-w-[400px]"
-              onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal content
+        {/* Modal for Selected Project */}
+        <AnimatePresence>
+          {isModalOpen && selectedCard && (
+            <motion.div
+              className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 flex items-center justify-center z-50"
+              onClick={handleModalClose}
+              variants={modalOverlayVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
             >
-              <div className="flex flex-col gap-4">
-                <div className="flex flex-col w-full p-2 px-6 relative">
-                  <button
-                    className="absolute top-2 right-[-2px]"
-                    onClick={handleModalClose}
-                    aria-label="Close menu"
-                  >
-                    <CustomX />
-                  </button>
-                  {selectedImage && (
-                    <Image
-                      src={selectedImage}
-                      alt={`Preview of ${selectedCard.title}`}
-                      width={500}
-                      height={300}
-                      className="w-full max-w-[300px] object-cover rounded-lg mx-auto"
-                      loading="lazy"
-                    />
-                  )}
-                </div>
-                <div className="w-full p-2 flex flex-col">
-                  <h2 className="text-lg font-bold">{selectedCard.title}</h2>
-                  <p className="text-sm text-gray-300">
-                    {selectedCard.fullDetails}
-                  </p>
-
-                  <div className="my-4">
-                    <h3 className="text-lg font-semibold mb-2">Features:</h3>
-                    <ul className="list-disc list-inside text-gray-300">
-                      {selectedCard.features.map((feature, index) => (
-                        <li key={index}>{feature}</li>
-                      ))}
-                    </ul>
+              <motion.div
+                className="w-full max-w-[700px] bg-[rgb(13,13,13)] text-white border rounded-xl p-4 sm:max-w-[400px]"
+                onClick={(e) => e.stopPropagation()}
+                variants={modalContentVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <div className="flex flex-col gap-4">
+                  <div className="flex flex-col w-full p-2 px-6 relative">
+                    <button
+                      className="absolute top-2 right-[-2px]"
+                      onClick={handleModalClose}
+                      aria-label="Close modal"
+                    >
+                      <CustomX />
+                    </button>
+                    {selectedImage && (
+                      <Image
+                        src={selectedImage}
+                        alt={`Preview of ${selectedCard.title}`}
+                        width={500}
+                        height={300}
+                        className="w-full max-w-[300px] object-cover rounded-lg mx-auto"
+                        loading="lazy"
+                      />
+                    )}
                   </div>
-                  <div className="flex gap-2 mt-auto">
-                    <a href={selectedCard.githubLink} target="_blank">
-                      <Button className="w-full bg-gray-800 text-white hover:bg-gray-700 py-2 text-sm font-bold rounded">
-                        GitHub
-                      </Button>
-                    </a>
-                    <a href={selectedCard.liveDemoLink} target="_blank">
-                      <Button className="w-full bg-blue-600 text-white hover:bg-blue-500 py-2 text-sm font-bold rounded">
-                        Live Demo
-                      </Button>
-                    </a>
+                  <div className="w-full p-2 flex flex-col">
+                    <h2 className="text-lg font-bold">{selectedCard.title}</h2>
+                    <p className="text-sm text-gray-300">
+                      {selectedCard.fullDetails}
+                    </p>
+
+                    <div className="my-4">
+                      <h3 className="text-lg font-semibold mb-2">Features:</h3>
+                      <ul className="list-disc list-inside text-gray-300">
+                        {selectedCard.features.map((feature, index) => (
+                          <li key={index}>{feature}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="flex gap-2 mt-auto">
+                      <a href={selectedCard.githubLink} target="_blank">
+                        <Button className="w-full bg-gray-800 text-white hover:bg-gray-700 py-2 text-sm font-bold rounded">
+                          GitHub
+                        </Button>
+                      </a>
+                      <a href={selectedCard.liveDemoLink} target="_blank">
+                        <Button className="w-full bg-blue-600 text-white hover:bg-blue-500 py-2 text-sm font-bold rounded">
+                          Live Demo
+                        </Button>
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        )}
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
+        {/* Portfolio Cards Grid */}
         <div className="grid grid-cols-1 justify-items-center md:grid-cols-2 gap-6">
           {cardsData.map((card, index) => (
-            <div
+            <motion.div
               key={index}
-              className={`cursor-pointer w-full transform transition-transform duration-1000 ${
-                hasAnimated
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-[200px] opacity-0"
-              }`}
-              ref={observerRef}
+              className="cursor-pointer w-full"
+              variants={cardVariants}
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
               onClick={() => handleCardClick(card)}
             >
               <ProjectCard data={card} onClick={() => handleCardClick(card)}>
@@ -287,7 +280,7 @@ const Portfolio: React.FC = () => {
                   Learn More
                 </Button>
               </ProjectCard>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

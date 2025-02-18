@@ -5,6 +5,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion"; // Import Framer Motion
 
 const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -38,7 +39,6 @@ const Navbar: React.FC = () => {
         {/* Logo with animated GIF */}
         <h1 className="relative text-3xl md:text-5xl font-bold text-white">
           <Link href="/">yur1.dev</Link>
-          {/* Position the larger GIF near or overlapping the text */}
           <div className="absolute -top-2 -right-8">
             <Image
               src="/pixel-cat.gif"
@@ -61,9 +61,6 @@ const Navbar: React.FC = () => {
           <NavItem href="/projects" onClick={() => setIsMobileMenuOpen(false)}>
             Projects
           </NavItem>
-          {/* <NavItem href="/contacts" onClick={() => setIsMobileMenuOpen(false)}>
-            Contacts
-          </NavItem> */}
         </ul>
 
         {/* Download CV Button for Desktop */}
@@ -98,14 +95,16 @@ const Navbar: React.FC = () => {
         </button>
       </div>
 
-      {/* Full-Screen Mobile Navigation */}
-      <div
-        className={clsx(
-          "fixed inset-0 z-50 bg-black text-white flex flex-col justify-center items-center transform transition-transform duration-500",
-          isMobileMenuOpen
-            ? "translate-y-0 opacity-100"
-            : "-translate-y-full opacity-0"
-        )}
+      {/* Full-Screen Mobile Navigation with Framer Motion */}
+      <motion.div
+        initial={{ y: "-100%", opacity: 0 }}
+        animate={{
+          y: isMobileMenuOpen ? "0%" : "-100%",
+          opacity: isMobileMenuOpen ? 1 : 0,
+        }}
+        exit={{ y: "-100%", opacity: 0 }}
+        transition={{ duration: 0.5 }}
+        className="fixed inset-0 z-50 bg-black text-white flex flex-col justify-center items-center"
       >
         {/* Close Button */}
         <button
@@ -130,7 +129,12 @@ const Navbar: React.FC = () => {
         </button>
 
         {/* Mobile Navigation Links */}
-        <ul className="flex flex-col gap-6 text-center text-2xl font-semibold">
+        <motion.ul
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isMobileMenuOpen ? 1 : 0 }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col gap-6 text-center text-2xl font-semibold"
+        >
           <NavItem href="/" onClick={() => setIsMobileMenuOpen(false)}>
             Intro
           </NavItem>
@@ -140,10 +144,7 @@ const Navbar: React.FC = () => {
           <NavItem href="/projects" onClick={() => setIsMobileMenuOpen(false)}>
             Projects
           </NavItem>
-          {/* <NavItem href="/contacts" onClick={() => setIsMobileMenuOpen(false)}>
-            Contacts
-          </NavItem> */}
-        </ul>
+        </motion.ul>
 
         {/* Download CV Button for Mobile */}
         <div className="mt-8">
@@ -153,7 +154,7 @@ const Navbar: React.FC = () => {
             </a>
           </Button>
         </div>
-      </div>
+      </motion.div>
     </nav>
   );
 };

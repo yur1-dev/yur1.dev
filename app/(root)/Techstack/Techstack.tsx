@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const techStackData = [
   {
@@ -48,58 +49,70 @@ const techStackData = [
 
 const Techstack: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const techStackRef = useRef(null);
+  const techStackRef = useRef<HTMLDivElement>(null);
 
   // Intersection Observer to trigger animation when the section comes into view
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true); // Trigger animations when in view
+          setIsVisible(true);
+          observer.disconnect();
         }
       },
       { threshold: 0.8 }
     );
 
-    const currentRef = techStackRef.current; // Copy ref value to a variable
-    if (currentRef) {
-      observer.observe(currentRef);
+    if (techStackRef.current) {
+      observer.observe(techStackRef.current);
     }
 
     return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
+      observer.disconnect();
     };
   }, []);
 
+  // Framer Motion Variants
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const titleVariants = {
+    hidden: { opacity: 0, y: -10 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1 } },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+  };
+
   return (
     <div className="w-full px-4">
-      <div
+      <motion.div
         ref={techStackRef}
         className="max-w-[900px] h-[80vh] mx-auto flex flex-col justify-center relative"
+        variants={containerVariants}
+        initial="hidden"
+        animate={isVisible ? "visible" : "hidden"}
       >
         {/* Title */}
-        <div
-          className={`my-8 p-4 text-white transform transition-all duration-1000 ${
-            isVisible
-              ? "translate-y-0 opacity-100"
-              : "-translate-y-10 opacity-0"
-          }`}
-        >
+        <motion.div variants={titleVariants} className="my-8 p-4 text-white">
           <h2 className="text-4xl font-semibold mb-4">Tech Stack</h2>
-        </div>
+        </motion.div>
 
         {/* Tech Stack Items */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {techStackData.map((tech, index) => (
-            <div
+        <motion.div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {techStackData.map((tech) => (
+            <motion.div
               key={tech.alt}
-              className={`flex items-center border rounded-xl shadow-inner bg-[rgb(13,13,13)] p-2 sm:p-4 transform transition-all duration-1000 ${
-                isVisible
-                  ? `translate-x-0 opacity-100 delay-[${index * 100}ms]`
-                  : "-translate-x-full opacity-0"
-              }`}
+              variants={itemVariants}
+              className="flex items-center border rounded-xl shadow-inner bg-[rgb(13,13,13)] p-2 sm:p-4"
             >
               <Image
                 src={tech.src}
@@ -109,10 +122,10 @@ const Techstack: React.FC = () => {
                 className="mr-2"
               />
               <p className="text-base sm:text-lg lg:text-xl">{tech.name}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };

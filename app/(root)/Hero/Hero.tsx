@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Socials from "@/app/components/Socials/Socials";
 import { FaMapPin, FaTimes } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Hero: React.FC = () => {
   const [isHeroVisible, setIsHeroVisible] = useState(false);
@@ -42,19 +43,19 @@ const Hero: React.FC = () => {
       )}
 
       <div className="w-full px-4">
-        <div
-          className={`max-w-[900px] h-[80vh] mx-auto flex flex-col justify-center relative transition-all duration-1000 ${
-            isHeroVisible
-              ? "transform translate-y-0"
-              : "transform translate-y-10 opacity-0"
-          }`}
+        {/* Animate the hero section */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={isHeroVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+          transition={{ duration: 1 }}
+          className="max-w-[900px] h-[80vh] mx-auto flex flex-col justify-center relative"
         >
           <div>
             {/* Glowing Background */}
             <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 rounded-xl blur-xl opacity-30 -z-10"></div>
 
             {/* Portfolio Content */}
-            <div className="h-full w-full flex flex-col-reverse text-center lg:text-start lg:flex-row justify-between bg-black bg-opacity-80 rounded-xl border border-gray-700 relative z-10 p-6 transform transition-all duration-1000">
+            <div className="h-full w-full flex flex-col-reverse text-center lg:text-start lg:flex-row justify-between bg-black bg-opacity-80 rounded-xl border border-gray-700 relative z-10 p-6">
               {/* Left Content */}
               <div className="flex flex-col justify-evenly gap-5 w-full lg:w-2/3">
                 <h1 className="text-3xl sm:text-4xl lg:text-6xl text-white capitalize">
@@ -100,54 +101,64 @@ const Hero: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Modal for Telegram Contact */}
-      {isModalOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
-          onClick={handleModalClose}
-        >
-          <div
-            className="bg-black bg-opacity-90 p-6 rounded-xl border border-gray-700 relative max-w-sm w-full mx-4"
-            onClick={(e) => e.stopPropagation()}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+            onClick={handleModalClose}
           >
-            {/* Close Button */}
-            <button
-              className="absolute top-2 right-2 text-gray-300 hover:text-white text-xl"
-              onClick={handleModalClose}
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="bg-black bg-opacity-90 p-6 rounded-xl border border-gray-700 relative max-w-sm w-full mx-4"
+              onClick={(e) => e.stopPropagation()}
             >
-              <FaTimes />
-            </button>
+              {/* Close Button */}
+              <button
+                className="absolute top-2 right-2 text-gray-300 hover:text-white text-xl"
+                onClick={handleModalClose}
+              >
+                <FaTimes />
+              </button>
 
-            {/* Modal Text */}
-            <h2 className="text-2xl text-white mb-4">
-              Let&apos;s Chat on Telegram!
-            </h2>
-            <p className="text-gray-300 mb-6">
-              I&apos;m excited to hear from you! You can reach out to me
-              directly on Telegram.
-            </p>
-            <a
-              href="https://t.me/yuri_roc"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button className="bg-secondary border-[1px] text-white">
-                Chat on Telegram
-              </Button>
-            </a>
+              {/* Modal Text */}
+              <h2 className="text-2xl text-white mb-4">
+                Let&apos;s Chat on Telegram!
+              </h2>
+              <p className="text-gray-300 mb-6">
+                I&apos;m excited to hear from you! You can reach out to me
+                directly on Telegram.
+              </p>
+              <a
+                href="https://t.me/yuri_roc"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button className="bg-secondary border-[1px] text-white">
+                  Chat on Telegram
+                </Button>
+              </a>
 
-            {/* Cat in the bottom-right corner (larger size) */}
-            <img
-              src="/pixel-cat.gif"
-              alt="Pixel Cat Animation"
-              className="w-16 h-16 absolute bottom-2 right-2"
-            />
-          </div>
-        </div>
-      )}
+              {/* Cat in the bottom-right corner */}
+              <img
+                src="/pixel-cat.gif"
+                alt="Pixel Cat Animation"
+                className="w-16 h-16 absolute bottom-2 right-2"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
