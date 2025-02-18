@@ -55,12 +55,13 @@ const Techstack: React.FC = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
+        console.log("Intersection Observer Entry:", entry);
         if (entry.isIntersecting) {
           setIsVisible(true);
           observer.disconnect();
         }
       },
-      { threshold: 0.8 }
+      { threshold: 0.1 } // lowered threshold from 0.8 to 0.1 for earlier triggering
     );
 
     if (techStackRef.current) {

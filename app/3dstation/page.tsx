@@ -1,29 +1,35 @@
 "use client";
-
 import React, { useState } from "react";
-import Navbar from "../components/Navbar/Navbar"; // Adjust path if needed
+import Navbar from "../components/Navbar/Navbar";
 
-// Sample data for each motion graphic
-const motionGraphics = [
+interface MotionGraphic {
+  name: string;
+  videoSrc: string;
+  title: string;
+  subTitle: string;
+  description: string;
+}
+
+const motionGraphics: MotionGraphic[] = [
   {
-    name: "Avalaunch",
-    videoSrc: "/video/", //grid-animation.mp4
-    title: "AVALAUNCH",
+    name: "Grid Animation",
+    videoSrc: "/video/grid-animation.mp4",
+    title: "GRID ANIMATION",
     subTitle: "UI/UX Design, Social Media Assets, Motion Graphics",
     description:
-      "Avalaunch is the first protocol, exclusively for the Avalanche ecosystem, to offer promising and innovative projects a fast, secure, and efficient platform for decentralized fundraising.",
+      "Discover next-level 3D experiences with immersive visuals and state-of-the-art animation—our 3D station transforms digital artistry into interactive wonderlands.",
   },
   {
     name: "Colony",
-    videoSrc: "/vid/colony.mp4",
+    videoSrc: "/video/grid-animation.mp4",
     title: "COLONY",
     subTitle: "Branding, Web Design, Social Media Assets",
     description:
-      "Colony is a community-driven platform that invests in early-stage, well-vetted Avalanche projects. Our motion graphics helped them capture their unique brand identity.",
+      "Colony is a community-driven platform that invests in early-stage, well-vetted projects. Our motion graphics helped them capture their unique brand identity.",
   },
   {
     name: "Paribus",
-    videoSrc: "/vid/paribus.mp4",
+    videoSrc: "/video/grid-animation.mp4",
     title: "PARIBUS",
     subTitle: "DeFi Lending & Borrowing Platform",
     description:
@@ -31,74 +37,129 @@ const motionGraphics = [
   },
   {
     name: "FantomGo",
-    videoSrc: "/vid/fantomgo.mp4",
+    videoSrc: "/video/grid-animation.mp4",
     title: "FANTOMGO",
     subTitle: "Token Launchpad & Ecosystem",
     description:
       "FantomGo helps projects build on Fantom. We created dynamic motion graphics showcasing the speed and scalability of their network.",
   },
+  {
+    name: "Nebula",
+    videoSrc: "/video/grid-animation.mp4",
+    title: "NEBULA",
+    subTitle: "Visual Effects, Cinematics, Digital Art",
+    description:
+      "Nebula is a visual journey through cosmic landscapes, blending digital art and dynamic effects to create an immersive experience.",
+  },
+  {
+    name: "Cosmos",
+    videoSrc: "/video/grid-animation.mp4",
+    title: "COSMOS",
+    subTitle: "Sci-Fi, Animation, Experimental",
+    description:
+      "Cosmos pushes the boundaries of futuristic animation with experimental techniques and mind-bending visuals that transport you to another dimension.",
+  },
 ];
 
 export default function Page() {
-  // Keep track of which item we're hovering
-  const [hoveredIndex, setHoveredIndex] = useState(0);
+  const [backgroundVideo, setBackgroundVideo] = useState<MotionGraphic | null>(
+    null
+  );
+  const [fade, setFade] = useState(false);
+
+  const handleVideoClick = (video: MotionGraphic) => {
+    if (backgroundVideo) {
+      setFade(true);
+      setTimeout(() => {
+        setBackgroundVideo(video);
+        setFade(false);
+      }, 500);
+    } else {
+      setBackgroundVideo(video);
+    }
+  };
 
   return (
-    <div className="relative w-full min-h-screen overflow-hidden bg-black">
-      {/* Fixed Navbar at the top */}
-      <div className="absolute top-0 left-0 w-full z-20">
+    <div className="relative w-full min-h-screen overflow-hidden">
+      {/* Background Video */}
+      {backgroundVideo && (
+        <video
+          key={backgroundVideo.videoSrc}
+          src={backgroundVideo.videoSrc}
+          autoPlay
+          loop
+          muted
+          className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 ${
+            fade ? "opacity-0" : "opacity-100"
+          }`}
+        />
+      )}
+
+      {/* Dark overlay */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 pointer-events-none"></div>
+
+      {/* Navbar */}
+      <div className="relative z-30">
         <Navbar />
       </div>
 
-      {/* Content wrapper (padded for navbar) */}
-      <div className="pt-24 px-4 max-w-[900px] w-full mx-auto">
-        {/* Row of "links" (tabs) */}
-        <ul className="flex gap-4 text-sm text-gray-300 border-b border-gray-700 pb-2 mb-6">
-          {motionGraphics.map((item, i) => (
-            <li
-              key={item.name}
-              className={`relative pb-2 cursor-pointer transition ${
-                hoveredIndex === i
-                  ? "text-white font-semibold"
-                  : "hover:text-white"
-              }`}
-              onMouseEnter={() => setHoveredIndex(i)}
-            >
-              {item.name}
-              {/* Pink underline if this item is active */}
-              {hoveredIndex === i && (
-                <div className="absolute bottom-0 left-0 w-full h-[2px] bg-pink-500"></div>
-              )}
-            </li>
-          ))}
-        </ul>
+      {/* Main Content - Bento Grid */}
+      <div className="relative z-30 max-w-4xl mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-2 auto-rows-[80px]">
+          {motionGraphics.map((item, idx) => {
+            let gridClasses = "";
+            switch (idx) {
+              case 0:
+                gridClasses = "md:col-span-4 md:row-span-2";
+                break;
+              case 1:
+                gridClasses = "md:col-span-2 md:row-span-2";
+                break;
+              case 2:
+                gridClasses = "md:col-span-3 md:row-span-2";
+                break;
+              case 3:
+                gridClasses = "md:col-span-3 md:row-span-2";
+                break;
+              case 4:
+                gridClasses = "md:col-span-4 md:row-span-2";
+                break;
+              case 5:
+                gridClasses = "md:col-span-2 md:row-span-2";
+                break;
+              default:
+                gridClasses = "md:col-span-2 md:row-span-2";
+            }
 
-        {/* Main Card (50vh) */}
-        <div className="h-[50vh] w-full flex flex-col-reverse lg:flex-row text-center lg:text-start justify-between bg-black bg-opacity-80 rounded-xl border border-gray-700 relative z-10 p-6">
-          {/* LEFT: Video container */}
-          <div className="w-full h-full flex items-center justify-center">
-            <video
-              key={hoveredIndex} // re-render on hover change
-              src={motionGraphics[hoveredIndex].videoSrc}
-              className="w-full h-full object-cover"
-              autoPlay
-              loop
-              muted
-            />
-          </div>
-
-          {/* RIGHT: Text info */}
-          <div className="w-full h-full flex flex-col justify-center text-white lg:ml-6 mt-4 lg:mt-0">
-            <h2 className="text-3xl font-bold mb-2">
-              {motionGraphics[hoveredIndex].title}
-            </h2>
-            <p className="text-gray-300 mb-4">
-              {motionGraphics[hoveredIndex].subTitle}
-            </p>
-            <p className="leading-relaxed text-gray-200">
-              {motionGraphics[hoveredIndex].description}
-            </p>
-          </div>
+            return (
+              <div
+                key={item.name}
+                onClick={() => handleVideoClick(item)}
+                onMouseEnter={(e) => {
+                  const video = e.currentTarget.querySelector("video");
+                  video?.play();
+                }}
+                onMouseLeave={(e) => {
+                  const video = e.currentTarget.querySelector("video");
+                  video?.pause();
+                  if (video) video.currentTime = 0;
+                }}
+                className={`relative group cursor-pointer border border-gray-700 rounded-xl overflow-hidden shadow-lg transform transition-all duration-500 ${gridClasses}`}
+              >
+                <video
+                  src={item.videoSrc}
+                  className="w-full h-full object-cover"
+                  muted
+                  loop
+                  preload="metadata"
+                />
+                <div className="absolute inset-0 flex flex-col justify-end p-2 bg-gradient-to-t from-black via-transparent to-transparent">
+                  <h3 className="text-sm font-bold text-white">{item.title}</h3>
+                  <p className="text-xs text-gray-200">{item.subTitle}</p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
