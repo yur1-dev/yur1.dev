@@ -61,6 +61,9 @@ const Navbar: React.FC = () => {
           <NavItem href="/projects" onClick={() => setIsMobileMenuOpen(false)}>
             Projects
           </NavItem>
+          <NavItem href="/3dstation" onClick={() => setIsMobileMenuOpen(false)}>
+            3D Station
+          </NavItem>
         </ul>
 
         {/* Download CV Button for Desktop */}
@@ -143,6 +146,9 @@ const Navbar: React.FC = () => {
           </NavItem>
           <NavItem href="/projects" onClick={() => setIsMobileMenuOpen(false)}>
             Projects
+          </NavItem>
+          <NavItem href="/3dstation" onClick={() => setIsMobileMenuOpen(false)}>
+            3D Station
           </NavItem>
         </motion.ul>
 
