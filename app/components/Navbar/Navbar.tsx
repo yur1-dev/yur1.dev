@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import clsx from "clsx";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";

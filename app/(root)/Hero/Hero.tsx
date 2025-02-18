@@ -12,12 +12,11 @@ const Hero: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Handle page load animation for Hero section (bottom to top)
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
       setIsHeroVisible(true);
-    }, 1500); // 1.5 seconds loading duration
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -32,7 +31,6 @@ const Hero: React.FC = () => {
 
   return (
     <>
-      {/* Fullscreen Loading Screen */}
       {loading && (
         <div
           id="loading-screen"
@@ -43,7 +41,6 @@ const Hero: React.FC = () => {
       )}
 
       <div className="w-full px-4">
-        {/* Animate the hero section */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={isHeroVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
@@ -51,12 +48,9 @@ const Hero: React.FC = () => {
           className="max-w-[900px] h-[80vh] mx-auto flex flex-col justify-center relative"
         >
           <div>
-            {/* Glowing Background */}
             <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 rounded-xl blur-xl opacity-30 -z-10"></div>
 
-            {/* Portfolio Content */}
             <div className="h-full w-full flex flex-col-reverse text-center lg:text-start lg:flex-row justify-between bg-black bg-opacity-80 rounded-xl border border-gray-700 relative z-10 p-6">
-              {/* Left Content */}
               <div className="flex flex-col justify-evenly gap-5 w-full lg:w-2/3">
                 <h1 className="text-3xl sm:text-4xl lg:text-6xl text-white capitalize">
                   Frontend Developer
@@ -68,7 +62,6 @@ const Hero: React.FC = () => {
                   for more than 3 years. I create professional websites.
                 </p>
 
-                {/* Socials on larger screens */}
                 <div className="lg:flex lg:justify-start lg:mt-4 mt-6">
                   <Socials />
                 </div>
@@ -82,7 +75,6 @@ const Hero: React.FC = () => {
                 </div>
               </div>
 
-              {/* Right Content */}
               <div className="flex flex-col gap-4 items-center w-full lg:w-1/3 mt-6 lg:mt-0">
                 <div className="flex items-center text-white gap-2">
                   <FaMapPin style={{ fontSize: "20px" }} />
@@ -104,7 +96,6 @@ const Hero: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* Modal for Telegram Contact */}
       <AnimatePresence>
         {isModalOpen && (
           <motion.div
@@ -123,7 +114,6 @@ const Hero: React.FC = () => {
               className="bg-black bg-opacity-90 p-6 rounded-xl border border-gray-700 relative max-w-sm w-full mx-4"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Close Button */}
               <button
                 className="absolute top-2 right-2 text-gray-300 hover:text-white text-xl"
                 onClick={handleModalClose}
@@ -131,7 +121,6 @@ const Hero: React.FC = () => {
                 <FaTimes />
               </button>
 
-              {/* Modal Text */}
               <h2 className="text-2xl text-white mb-4">
                 Let&apos;s Chat on Telegram!
               </h2>
@@ -149,12 +138,17 @@ const Hero: React.FC = () => {
                 </Button>
               </a>
 
-              {/* Cat in the bottom-right corner */}
-              <img
-                src="/pixel-cat.gif"
-                alt="Pixel Cat Animation"
-                className="w-16 h-16 absolute bottom-2 right-2"
-              />
+              {/* Fixed Image component */}
+              <div className="w-16 h-16 absolute bottom-2 right-2">
+                <Image
+                  src="/pixel-cat.gif"
+                  alt="Pixel Cat Animation"
+                  width={64}
+                  height={64}
+                  className="w-full h-full"
+                  unoptimized // Preserve GIF animation
+                />
+              </div>
             </motion.div>
           </motion.div>
         )}

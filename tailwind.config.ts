@@ -8,12 +8,18 @@ export default {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./features/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  safelist: ["max-w-[900px]", "h-[80vh]", "bg-[rgb(13,13,13)]"],
+  safelist: [
+    "max-w-[900px]",
+    "h-[80vh]",
+    "bg-[rgb(13,13,13)]",
+    "duration-[1000ms]", // Added for transition duration fix
+  ],
   theme: {
     extend: {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        secondary: "var(--secondary)", // Added missing secondary color
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -58,7 +64,14 @@ export default {
       backgroundSize: {
         "400%": "400% 400%",
       },
+      transitionDuration: {
+        // Added explicit duration configuration
+        "1000": "1000ms",
+      },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/typography"), // Added common plugin
+  ],
 } satisfies Config;
