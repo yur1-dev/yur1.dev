@@ -74,7 +74,6 @@ const ProjectCard: React.FC<{
   );
 };
 
-// Custom X Icon built with HTML & Tailwind CSS
 const CustomX: React.FC = () => {
   return (
     <div className="relative w-6 h-6">
@@ -84,7 +83,6 @@ const CustomX: React.FC = () => {
   );
 };
 
-// Framer Motion Variants
 const titleVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { duration: 0.8 } },
