@@ -20,9 +20,9 @@ const motionGraphics: MotionGraphic[] = [
       "Discover next-level 3D experiences with immersive visuals and state-of-the-art animation—our 3D station transforms digital artistry into interactive wonderlands.",
   },
   {
-    name: "Colony",
-    videoSrc: "/video/grid-animation.mp4",
-    title: "COLONY",
+    name: "Cube Falling",
+    videoSrc: "/video/cube-falling.mp4",
+    title: "CUBE FALLING",
     subTitle: "Branding, Web Design, Social Media Assets",
     description:
       "Colony is a community-driven platform that invests in early-stage, well-vetted projects. Our motion graphics helped them capture their unique brand identity.",
