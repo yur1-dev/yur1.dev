@@ -4,17 +4,16 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion"; // Import Framer Motion
+import { motion } from "framer-motion";
 
 const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Manage body overflow for mobile menu
   useEffect(() => {
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = isMobileMenuOpen ? "hidden" : prevOverflow;
     return () => {
-      document.body.style.overflow = prevOverflow; // Reset on cleanup
+      document.body.style.overflow = prevOverflow;
     };
   }, [isMobileMenuOpen]);
 
