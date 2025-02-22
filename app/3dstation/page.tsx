@@ -28,9 +28,9 @@ const motionGraphics: MotionGraphic[] = [
       "Colony is a community-driven platform that invests in early-stage, well-vetted projects. Our motion graphics helped them capture their unique brand identity.",
   },
   {
-    name: "Paribus",
-    videoSrc: "/video/grid-animation.mp4",
-    title: "PARIBUS",
+    name: "Line Animation",
+    videoSrc: "/video/line-animation.mp4",
+    title: "LINE ANIMATION",
     subTitle: "DeFi Lending & Borrowing Platform",
     description:
       "Paribus needed engaging visuals to illustrate their cross-chain lending solutions. Our team delivered sleek, informative motion graphics.",
