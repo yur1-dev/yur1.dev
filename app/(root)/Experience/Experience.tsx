@@ -108,7 +108,7 @@ const Experience = () => {
         </motion.h1>
 
         <Tabs defaultValue="work" className="w-full">
-          <TabsList className="flex justify-center bg-[#0D0D0D] space-x-4 mb-6">
+          <TabsList className="flex justify-center bg-opacity-0 space-x-4 mb-6">
             <TabsTrigger
               value="work"
               className="py-1 px-4 sm:px-6 md:px-12 text-white text-lg font-normal rounded-xl bg-none"
