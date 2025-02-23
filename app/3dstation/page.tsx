@@ -23,41 +23,41 @@ const motionGraphics: MotionGraphic[] = [
     name: "Cube Falling",
     videoSrc: "/video/cube-falling.mp4",
     title: "CUBE FALLING",
-    subTitle: "Branding, Web Design, Social Media Assets",
+    subTitle: "Branding, Web Design, Visual Storytelling",
     description:
-      "Colony is a community-driven platform that invests in early-stage, well-vetted projects. Our motion graphics helped them capture their unique brand identity.",
+      "Experience the captivating cascade of falling cubes. This motion graphic blends dynamic animation with creative design, delivering a fresh visual narrative.",
   },
   {
     name: "Line Animation",
     videoSrc: "/video/line-animation.mp4",
     title: "LINE ANIMATION",
-    subTitle: "DeFi Lending & Borrowing Platform",
+    subTitle: "Digital Art, Creative Motion, Visual Dynamics",
     description:
-      "Paribus needed engaging visuals to illustrate their cross-chain lending solutions. Our team delivered sleek, informative motion graphics.",
+      "Our Line Animation offers a smooth, flowing visual journey that perfectly marries creative design with fluid motion, ideal for modern digital storytelling.",
   },
   {
-    name: "FantomGo",
-    videoSrc: "/video/grid-animation.mp4",
-    title: "FANTOMGO",
-    subTitle: "Token Launchpad & Ecosystem",
+    name: "Fluid Motion",
+    videoSrc: "/video/line-animation.mp4",
+    title: "FLUID MOTION",
+    subTitle: "Innovative Motion, Fluid Animation, Creative Expression",
     description:
-      "FantomGo helps projects build on Fantom. We created dynamic motion graphics showcasing the speed and scalability of their network.",
+      "Experience dynamic motion graphics with Fluid Motion. This visual display showcases energetic movement and creative expression, elevating any visual project.",
   },
   {
-    name: "Nebula",
-    videoSrc: "/video/grid-animation.mp4",
-    title: "NEBULA",
+    name: "Nebula Motion",
+    videoSrc: "/video/line-animation.mp4",
+    title: "NEBULA MOTION",
     subTitle: "Visual Effects, Cinematics, Digital Art",
     description:
-      "Nebula is a visual journey through cosmic landscapes, blending digital art and dynamic effects to create an immersive experience.",
+      "Immerse yourself in Nebula Motion, a captivating journey through digital art where dynamic effects and innovative animation combine to create a mesmerizing experience.",
   },
   {
-    name: "Cosmos",
-    videoSrc: "/video/grid-animation.mp4",
-    title: "COSMOS",
-    subTitle: "Sci-Fi, Animation, Experimental",
+    name: "Aurora Motion",
+    videoSrc: "/video/line-animation.mp4",
+    title: "AURORA MOTION",
+    subTitle: "Futuristic Animation, Experimental Design, Visual Art",
     description:
-      "Cosmos pushes the boundaries of futuristic animation with experimental techniques and mind-bending visuals that transport you to another dimension.",
+      "Aurora Motion redefines the limits of animation, blending experimental techniques with innovative visuals to transport you into a realm of artistic expression.",
   },
 ];
 
