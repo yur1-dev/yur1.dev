@@ -56,7 +56,7 @@ const Hero: React.FC = () => {
                   Frontend Developer
                 </h1>
                 <p className="text-sm sm:text-base lg:text-lg font-extralight text-gray-300">
-                  I'm a 23 years old Frontend Developer with 3 years of
+                  I&apos;m a 23 years old Frontend Developer with 3 years of
                   experience building professional websites and creating
                   engaging motion graphics.
                 </p>
