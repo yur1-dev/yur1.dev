@@ -242,7 +242,7 @@ const Portfolio: React.FC = () => {
                       </a>
                       <a href={selectedCard.liveDemoLink} target="_blank">
                         <Button className="w-full bg-blue-600 text-white hover:bg-blue-500 py-2 text-sm font-bold rounded">
-                          Live Demo
+                          Live
                         </Button>
                       </a>
                     </div>
