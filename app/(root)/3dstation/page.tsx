@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Navbar from "../components/Navbar/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 
 interface MotionGraphic {
   name: string;
@@ -35,30 +35,30 @@ const motionGraphics: MotionGraphic[] = [
     description:
       "Our Line Animation offers a smooth, flowing visual journey that perfectly marries creative design with fluid motion, ideal for modern digital storytelling.",
   },
-  {
-    name: "Fluid Motion",
-    videoSrc: "/video/line-animation.mp4",
-    title: "FLUID MOTION",
-    subTitle: "Innovative Motion, Fluid Animation, Creative Expression",
-    description:
-      "Experience dynamic motion graphics with Fluid Motion. This visual display showcases energetic movement and creative expression, elevating any visual project.",
-  },
-  {
-    name: "Nebula Motion",
-    videoSrc: "/video/line-animation.mp4",
-    title: "NEBULA MOTION",
-    subTitle: "Visual Effects, Cinematics, Digital Art",
-    description:
-      "Immerse yourself in Nebula Motion, a captivating journey through digital art where dynamic effects and innovative animation combine to create a mesmerizing experience.",
-  },
-  {
-    name: "Aurora Motion",
-    videoSrc: "/video/line-animation.mp4",
-    title: "AURORA MOTION",
-    subTitle: "Futuristic Animation, Experimental Design, Visual Art",
-    description:
-      "Aurora Motion redefines the limits of animation, blending experimental techniques with innovative visuals to transport you into a realm of artistic expression.",
-  },
+  // {
+  //   name: "Fluid Motion",
+  //   videoSrc: "/video/line-animation.mp4",
+  //   title: "FLUID MOTION",
+  //   subTitle: "Innovative Motion, Fluid Animation, Creative Expression",
+  //   description:
+  //     "Experience dynamic motion graphics with Fluid Motion. This visual display showcases energetic movement and creative expression, elevating any visual project.",
+  // },
+  // {
+  //   name: "Nebula Motion",
+  //   videoSrc: "/video/line-animation.mp4",
+  //   title: "NEBULA MOTION",
+  //   subTitle: "Visual Effects, Cinematics, Digital Art",
+  //   description:
+  //     "Immerse yourself in Nebula Motion, a captivating journey through digital art where dynamic effects and innovative animation combine to create a mesmerizing experience.",
+  // },
+  // {
+  //   name: "Aurora Motion",
+  //   videoSrc: "/video/line-animation.mp4",
+  //   title: "AURORA MOTION",
+  //   subTitle: "Futuristic Animation, Experimental Design, Visual Art",
+  //   description:
+  //     "Aurora Motion redefines the limits of animation, blending experimental techniques with innovative visuals to transport you into a realm of artistic expression.",
+  // },
 ];
 
 export default function Page() {
