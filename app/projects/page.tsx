@@ -23,12 +23,58 @@ interface Project {
   liveDemoLink: string;
   year: string;
   category: string;
-  color: string; // accent color for this project
+  color: string;
 }
 
 const projects: Project[] = [
   {
     id: 1,
+    title: "Wraith Scanner",
+    subtitle: "Real-time Solana meme coin signal scanner",
+    description:
+      "A live meme coin scanner that aggregates viral signals from celebrity social media, TikTok trends, YouTube, Reddit, and on-chain sources like Pump.fun and DexScreener. Scores coins with multipliers and tracks win rate in real time.",
+    imageSrc: "/wraith-hero.png",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind",
+      "Solana",
+      "DexScreener",
+    ],
+    features: [
+      "Live Signal Scanning",
+      "Celebrity Source Tracking",
+      "On-Chain Metrics",
+      "Win Rate Tracker",
+    ],
+    githubLink: "https://github.com/yur1-dev/wraith-scan",
+    liveDemoLink: "https://wraith-scan.vercel.app",
+    year: "2025",
+    category: "Web3 / Scanner",
+    color: "#f97316",
+  },
+  {
+    id: 2,
+    title: "KŌKA",
+    subtitle: "Collect. Trade. Own.",
+    description:
+      "A digital collectibles platform where users trade rare cards, build their collection, and connect with fellow enthusiasts. Built for early collectors with exclusive legendary card drops.",
+    imageSrc: "/koka-hero.png",
+    technologies: ["Next.js", "TypeScript", "Tailwind", "React"],
+    features: [
+      "Digital Card Collecting",
+      "Whitelist System",
+      "Rarity Tiers",
+      "Early Collector Rewards",
+    ],
+    githubLink: "https://github.com/yur1-dev/koka",
+    liveDemoLink: "https://koka-landing.vercel.app",
+    year: "2025",
+    category: "NFT / Collectibles",
+    color: "#84cc16",
+  },
+  {
+    id: 3,
     title: "Solana Vibe Station",
     subtitle: "Your Solana RPCs Gateway",
     description:
@@ -41,14 +87,14 @@ const projects: Project[] = [
       "Lightning Fast",
       "Always On",
     ],
-    githubLink: "https://github.com/example/svs",
+    githubLink: "https://github.com/Rii1126/svs-portal",
     liveDemoLink: "https://solanavibestation.vercel.app",
     year: "2023",
     category: "Web3 / DeFi",
     color: "#a855f7",
   },
   {
-    id: 2,
+    id: 4,
     title: "PumpBot",
     subtitle: "The fastest way to launch and manage your assets",
     description:
@@ -61,14 +107,14 @@ const projects: Project[] = [
       "Real-Time Data",
       "Mobile Responsive",
     ],
-    githubLink: "https://github.com/example/pumpbot",
-    liveDemoLink: "https://pumpbot.vercel.app",
+    githubLink: "https://github.com/yur1-dev/pumpbot",
+    liveDemoLink: "https://pump-bot-five.vercel.app/",
     year: "2024",
     category: "Web3 / Trading",
     color: "#22d3ee",
   },
   {
-    id: 3,
+    id: 5,
     title: "Vyns",
     subtitle: "Your next-gen creative platform",
     description:
@@ -81,7 +127,7 @@ const projects: Project[] = [
       "Smooth Animations",
       "Mobile First",
     ],
-    githubLink: "https://github.com/example/vyns",
+    githubLink: "https://github.com/yur1-dev/vyns-app",
     liveDemoLink: "https://vyns-app.vercel.app",
     year: "2026",
     category: "Design / Creative",
@@ -104,7 +150,6 @@ export default function ProjectsPage() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
 
-        /* ── PAGE SHELL ── */
         .projects-page {
           min-height: 100vh;
           background: #060608;
@@ -113,7 +158,6 @@ export default function ProjectsPage() {
           overflow-x: hidden;
         }
 
-        /* ── HERO HEADER ── */
         .projects-header {
           max-width: 900px;
           margin: 0 auto;
@@ -163,7 +207,6 @@ export default function ProjectsPage() {
           line-height: 1.7;
         }
 
-        /* ── PROJECT COUNT ── */
         .projects-count {
           font-family: 'Space Mono', monospace;
           font-size: 0.65rem;
@@ -172,7 +215,6 @@ export default function ProjectsPage() {
           margin-top: 2rem;
         }
 
-        /* ── DIAGONAL GRID ── */
         .projects-diagonal-section {
           position: relative;
           width: 100%;
@@ -180,7 +222,6 @@ export default function ProjectsPage() {
           padding: 3rem 0 6rem;
         }
 
-        /* Background grid lines */
         .projects-diagonal-section::before {
           content: '';
           position: absolute;
@@ -201,7 +242,6 @@ export default function ProjectsPage() {
           gap: 1.5rem;
         }
 
-        /* ── INDIVIDUAL PROJECT CARD (horizontal full-width) ── */
         .proj-card {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -229,7 +269,6 @@ export default function ProjectsPage() {
           box-shadow: 0 30px 80px rgba(0,0,0,0.5);
         }
 
-        /* Accent glow on hover per card */
         .proj-card::after {
           content: '';
           position: absolute;
@@ -244,7 +283,6 @@ export default function ProjectsPage() {
           opacity: 1;
         }
 
-        /* ── IMAGE SIDE ── */
         .proj-card-image {
           position: relative;
           overflow: hidden;
@@ -263,7 +301,6 @@ export default function ProjectsPage() {
           transform: scale(1.05);
         }
 
-        /* Diagonal clip on image */
         .proj-card:nth-child(odd) .proj-card-image {
           clip-path: polygon(0 0, 95% 0, 100% 100%, 0 100%);
         }
@@ -281,7 +318,6 @@ export default function ProjectsPage() {
 
         .proj-card:hover .proj-card-image-overlay { opacity: 0.5; }
 
-        /* ── TEXT SIDE ── */
         .proj-card-content {
           display: flex;
           flex-direction: column;
@@ -387,7 +423,6 @@ export default function ProjectsPage() {
           border: 0.5px solid rgba(255,255,255,0.08);
         }
 
-        /* ── MOBILE: stack vertically ── */
         @media (max-width: 768px) {
           .proj-card {
             grid-template-columns: 1fr;
@@ -401,7 +436,6 @@ export default function ProjectsPage() {
           .proj-card-title { font-size: 1.5rem; }
         }
 
-        /* ── MODAL ── */
         .proj-modal {
           background: rgba(6,6,8,0.98) !important;
           backdrop-filter: blur(40px) !important;
@@ -571,7 +605,6 @@ export default function ProjectsPage() {
           transform: translateY(-1px);
         }
 
-        /* ── BOTTOM CTA ── */
         .projects-bottom-cta {
           max-width: 900px;
           margin: 0 auto;
@@ -641,7 +674,6 @@ export default function ProjectsPage() {
       <div className="projects-page">
         <Navbar />
 
-        {/* Header */}
         <div className="projects-header">
           <div className="projects-header-label">Selected Work</div>
           <h1>
@@ -656,7 +688,6 @@ export default function ProjectsPage() {
           <p className="projects-count">— {projects.length} projects</p>
         </div>
 
-        {/* Diagonal Project Cards */}
         <div className="projects-diagonal-section">
           <div className="projects-diagonal-inner">
             {projects.map((project, i) => (
@@ -667,22 +698,22 @@ export default function ProjectsPage() {
                 onMouseEnter={() => setHoveredId(project.id)}
                 onMouseLeave={() => setHoveredId(null)}
                 onClick={() => handleOpen(project)}
-                style={{
-                  ["--proj-color" as any]: project.color,
-                  boxShadow:
-                    hoveredId === project.id
-                      ? `0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px ${project.color}20`
-                      : undefined,
-                }}
+                style={
+                  {
+                    ["--proj-color" as string]: project.color,
+                    boxShadow:
+                      hoveredId === project.id
+                        ? `0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px ${project.color}20`
+                        : undefined,
+                  } as React.CSSProperties
+                }
               >
-                {/* Image */}
                 <div className="proj-card-image">
                   <img src={project.imageSrc} alt={project.title} />
                   <div className="proj-card-image-overlay" />
                   <div className="proj-card-year">{project.year}</div>
                 </div>
 
-                {/* Content */}
                 <div className="proj-card-content">
                   <div className="proj-card-index">
                     {String(i + 1).padStart(2, "0")} /{" "}
@@ -740,14 +771,13 @@ export default function ProjectsPage() {
           </div>
         </div>
 
-        {/* Bottom CTA */}
         <div className="projects-bottom-cta">
           <div className="projects-bottom-cta-inner">
             <div>
               <div className="projects-cta-text">
                 Have a project in mind?
                 <br />
-                <span>Let's make it real.</span>
+                <span>Let&apos;s make it real.</span>
               </div>
               <div className="projects-cta-sub">
                 Open for freelance and full-time opportunities.
@@ -762,7 +792,6 @@ export default function ProjectsPage() {
         <Footer />
       </div>
 
-      {/* Modal */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         {selectedProject && (
           <DialogContent
