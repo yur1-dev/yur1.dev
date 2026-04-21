@@ -19,6 +19,20 @@ export const metadata: Metadata = {
     siteName: "yur1.dev",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "https://yur1-dev.vercel.app/preview.png",
+        width: 1200,
+        height: 630,
+        alt: "Yuri Esber | Frontend Developer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Yuri Esber | Frontend Developer",
+    description: "Frontend developer crafting fast, beautiful web experiences.",
+    images: ["https://yur1-dev.vercel.app/preview.png"],
   },
 };
 
