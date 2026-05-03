@@ -191,7 +191,12 @@ const Footer = () => {
             <div className="footer-cta-sub">
               Open for freelance & full-time roles.
             </div>
-            <a href="mailto:hello@yur1.dev" className="footer-cta-btn">
+            <a
+              href="https://mail.google.com/mail/?view=cm&to=yuriesb01@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-cta-btn"
+            >
               Get in Touch →
             </a>
           </div>
@@ -225,11 +230,6 @@ const Footer = () => {
                       Portfolio
                     </a>
                   </li>
-                  {/* <li>
-                    <a href="/3dstation" className="footer-nav-link">
-                      3D Station
-                    </a>
-                  </li> */}
                 </ul>
               </div>
 

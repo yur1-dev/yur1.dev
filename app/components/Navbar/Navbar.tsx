@@ -1,11 +1,13 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import React, { useState, useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -13,12 +15,42 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (window.location.hash) {
+      const el = document.querySelector(window.location.hash);
+      if (el) setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 100);
+    }
+  }, [pathname]);
+
   const navLinks = [
     { label: "Intro", href: "/" },
-    { label: "Experience", href: "#experience" },
+    { label: "Experience", href: "/#experience" },
     { label: "Projects", href: "/projects" },
-    // { label: "3D Station", href: "/3dstation" },
   ];
+
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    if (href.startsWith("/#")) {
+      e.preventDefault();
+      const hash = href.slice(1);
+      if (pathname === "/") {
+        const el = document.querySelector(hash);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      } else {
+        router.push(href);
+      }
+    }
+  };
+
+  const handleMobileNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    setIsMobileMenuOpen(false);
+    handleNavClick(e, href);
+  };
 
   return (
     <>
@@ -211,7 +243,13 @@ const Navbar = () => {
           <ul className="nav-links">
             {navLinks.map((link) => (
               <li key={link.label}>
-                <a href={link.href} className="nav-link">
+                <a
+                  href={link.href}
+                  className="nav-link"
+                  onClick={(e: React.MouseEvent<HTMLAnchorElement>) =>
+                    handleNavClick(e, link.href)
+                  }
+                >
                   {link.label}
                 </a>
               </li>
@@ -236,19 +274,21 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu */}
       <div className={`mobile-menu ${isMobileMenuOpen ? "open" : ""}`}>
         {navLinks.map((link, i) => (
           <a
             key={link.label}
             href={link.href}
             className="mobile-link"
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={(e: React.MouseEvent<HTMLAnchorElement>) =>
+              handleMobileNavClick(e, link.href)
+            }
             style={{ animationDelay: `${i * 0.05}s` }}
           >
             {link.label}
           </a>
         ))}
+
         <a
           href="/marc_yuri_esber_cv.pdf"
           className="nav-cv-btn"
