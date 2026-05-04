@@ -1,5 +1,6 @@
 // app/layout.tsx
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Syne } from "next/font/google";
 import "./globals.css";
 
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/preview.png", // metadataBase handles the full URL automatically
+        url: "/preview.png",
         width: 1200,
         height: 630,
         alt: "Yuri Esber | Frontend Developer",
@@ -53,7 +54,7 @@ export const metadata: Metadata = {
     title: "Yuri Esber | Frontend Developer",
     description: "Frontend developer crafting fast, beautiful web experiences.",
     images: ["/preview.png"],
-    creator: "@yur1dev", // your twitter/X handle if you have one
+    creator: "@yur1dev",
   },
   robots: {
     index: true,
@@ -69,7 +70,6 @@ export const metadata: Metadata = {
   },
 };
 
-// Person schema — tells Google exactly who you are
 function PersonSchema() {
   const schema = {
     "@context": "https://schema.org",
@@ -84,10 +84,7 @@ function PersonSchema() {
       addressLocality: "Nueva Ecija",
       addressCountry: "PH",
     },
-    sameAs: [
-      "https://github.com/yur1-dev",
-      // add your LinkedIn, Twitter etc here
-    ],
+    sameAs: ["https://github.com/yur1-dev"],
   };
 
   return (
@@ -105,6 +102,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="overflow-x-hidden">
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-VW7WHKJRXR"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-VW7WHKJRXR');
+          `}
+        </Script>
+      </head>
       <body className={`${syne.className} antialiased bg-[#060608] text-white`}>
         <PersonSchema />
         {children}
