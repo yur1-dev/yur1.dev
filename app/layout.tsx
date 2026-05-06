@@ -26,9 +26,9 @@ export const metadata: Metadata = {
     "Yuri Esber",
     "yur1-dev",
   ],
-  authors: [{ name: "Yuri Esber", url: "https://yur1-dev.vercel.app" }],
+  authors: [{ name: "Yuri Esber", url: "https://www.yur1.xyz" }],
   creator: "Yuri Esber",
-  metadataBase: new URL("https://yur1-dev.vercel.app"),
+  metadataBase: new URL("https://www.yur1.xyz"),
   alternates: {
     canonical: "/",
   },
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: "Yuri Esber | Frontend Developer",
     description:
       "Frontend developer crafting fast, beautiful web experiences. Based in Nueva Ecija, Philippines.",
-    url: "https://yur1-dev.vercel.app",
+    url: "https://www.yur1.xyz",
     siteName: "yur1.dev",
     locale: "en_US",
     type: "website",
@@ -75,7 +75,7 @@ function PersonSchema() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Yuri Esber",
-    url: "https://yur1-dev.vercel.app",
+    url: "https://www.yur1.xyz",
     jobTitle: "Frontend Developer",
     description:
       "Frontend developer crafting fast, beautiful web experiences. Based in Nueva Ecija, Philippines.",
