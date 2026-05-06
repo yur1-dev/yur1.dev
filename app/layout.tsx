@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     description:
       "Frontend developer crafting fast, beautiful web experiences. Based in Nueva Ecija, Philippines.",
     url: "https://www.yur1.xyz",
-    siteName: "yur1.dev",
+    siteName: "yur1.xyz",
     locale: "en_US",
     type: "website",
     images: [
