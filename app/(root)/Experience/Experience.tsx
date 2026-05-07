@@ -8,7 +8,7 @@ const workData = [
     image: "/pumpbot-experience.png",
     duration: "Jan 2024 — Sept 2024",
     company: "PUMPBOT",
-    role: "Frontend Web Developer",
+    role: "Fullstack Developer",
     skills: ["Fullstack", "Figma", "Web Design"],
   },
   {
@@ -16,7 +16,7 @@ const workData = [
     image: "/svs-experience.png",
     duration: "Nov 2023 — Dec 2023",
     company: "Solana Vibe Station",
-    role: "Frontend Web Developer",
+    role: "Fullstack Developer",
     skills: ["Web Design", "Web Development"],
   },
   {
@@ -24,7 +24,7 @@ const workData = [
     image: "/vyns-experience.png",
     duration: "Mar 2023 — Jul 2023",
     company: "Vyns",
-    role: "Web Developer",
+    role: "Fullstack Developer",
     skills: ["Next.js", "Tailwind", "TypeScript"],
   },
 ];
@@ -44,7 +44,7 @@ const studiesData = [
     duration: "2017 — 2019",
     institution: "Maliwalo Senior High School",
     degree: "Diploma in Senior High School",
-    details: "Specialized in front-end",
+    details: "Specialized in front-end development.",
   },
   {
     id: 3,
@@ -52,7 +52,7 @@ const studiesData = [
     duration: "2015 — 2017",
     institution: "Scholastica de Leau Mer Academy",
     degree: "High School Diploma",
-    details: "Basic programming and minor subjects",
+    details: "Basic programming and minor subjects.",
   },
 ];
 
