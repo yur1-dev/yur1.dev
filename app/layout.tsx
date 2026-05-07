@@ -1,4 +1,3 @@
-// app/layout.tsx
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Syne } from "next/font/google";
@@ -41,24 +40,17 @@ export const metadata: Metadata = {
     "Yuri Esber",
     "yur1-dev",
   ],
-  authors: [{ name: "Yuri Esber", url: "https://www.yur1.xyz" }],
+  authors: [{ name: "Yuri Esber", url: "https://yur1.xyz" }],
   creator: "Yuri Esber",
-  metadataBase: new URL("https://www.yur1.xyz"),
+  metadataBase: new URL("https://yur1.xyz"),
   alternates: {
     canonical: "/",
-  },
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.png", type: "image/png", sizes: "32x32" },
-    ],
-    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
   },
   openGraph: {
     title: "Yuri Esber | Fullstack Developer",
     description:
       "Fullstack developer building websites, web apps, and Web3 projects. Next.js · React · Node.js · Solana. Based in Philippines.",
-    url: "https://www.yur1.xyz",
+    url: "https://yur1.xyz",
     siteName: "yur1.xyz",
     locale: "en_US",
     type: "website",
@@ -98,7 +90,7 @@ function PersonSchema() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Yuri Esber",
-    url: "https://www.yur1.xyz",
+    url: "https://yur1.xyz",
     jobTitle: "Fullstack Developer",
     description:
       "Fullstack developer building websites, web applications, and Web3 projects. Next.js, React, Node.js, Solana. Based in Nueva Ecija and San Jose, Tarlac, Philippines.",
