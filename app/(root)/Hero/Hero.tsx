@@ -523,7 +523,7 @@ const Hero: React.FC = () => {
               <div className="hero-stats">
                 <div className="hero-stat">
                   <div className="hero-stat-num">
-                    <span>3+</span>
+                    <span>5+</span>
                   </div>
                   <div className="hero-stat-label">Years Exp</div>
                 </div>
