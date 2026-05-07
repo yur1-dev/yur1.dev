@@ -267,7 +267,6 @@ const Hero: React.FC = () => {
           position: relative; z-index: 1; width: 100%;
         }
 
-        /* Desktop layout */
         .hero-main {
           display: flex;
           align-items: center;
@@ -275,10 +274,10 @@ const Hero: React.FC = () => {
           gap: 3rem;
         }
 
+        /* flex:1 + min-width:0 — text col shrinks properly, never bleeds into image */
         .hero-text { flex: 1; min-width: 0; }
         .hero-image-col { flex-shrink: 0; }
 
-        /* Image card */
         .hero-image-wrap { position: relative; width: 220px; height: 280px; }
         .hero-image-wrap::before {
           content: ''; position: absolute; inset: -1px; border-radius: 1.25rem;
@@ -312,7 +311,6 @@ const Hero: React.FC = () => {
           border-radius: 0 0.3rem 0 0; z-index: 2;
         }
 
-        /* Text elements */
         .hero-eyebrow {
           display: inline-flex; align-items: center; gap: 0.5rem;
           font-family: 'Space Mono', monospace; font-size: 0.7rem;
@@ -331,8 +329,15 @@ const Hero: React.FC = () => {
           50% { opacity: 0.5; transform: scale(0.8); }
         }
 
+        /*
+          THE FIX: was clamp(3rem, 8vw, 6rem).
+          At a 900px viewport, 8vw = 72px which overflows the text col when
+          the 220px image col is next to it. Dropping to clamp(2.5rem, 5vw, 4.5rem)
+          keeps "Developer" fully inside its flex column at all viewport widths.
+        */
         .hero-h1 {
-          font-size: clamp(3rem, 8vw, 6rem); font-weight: 800;
+          font-size: clamp(2.5rem, 5vw, 4.5rem);
+          font-weight: 800;
           line-height: 0.95; letter-spacing: -0.03em;
           color: #fff; margin: 0 0 1.25rem;
           animation: fadeSlideUp 0.6s 0.1s ease both;
@@ -378,16 +383,6 @@ const Hero: React.FC = () => {
         .btn-hire span { position: relative; z-index: 1; }
         .btn-hire svg { position: relative; z-index: 1; width: 15px; height: 15px; }
 
-        .btn-ghost {
-          display: inline-block; font-family: 'Syne', sans-serif;
-          font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em;
-          text-transform: uppercase; color: rgba(255,255,255,0.6);
-          background: none; border: 0.5px solid rgba(255,255,255,0.12);
-          border-radius: 0.5rem; padding: 0.75rem 1.75rem;
-          cursor: pointer; text-decoration: none; transition: all 0.25s ease;
-        }
-        .btn-ghost:hover { color: #fff; border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.04); }
-
         .hero-socials-wrap { margin-bottom: 2rem; animation: fadeSlideUp 0.6s 0.32s ease both; }
 
         .hero-stats { display: flex; gap: 2.5rem; animation: fadeSlideUp 0.6s 0.35s ease both; }
@@ -430,42 +425,20 @@ const Hero: React.FC = () => {
           100% { transform: scaleY(0); transform-origin: bottom; }
         }
 
-        /* ─── MOBILE ─── */
         @media (max-width: 768px) {
-          .hero-root {
-            padding-top: 6rem;
-            padding-bottom: 5rem;
-            align-items: flex-start;
-          }
-
-          .hero-main {
-            flex-direction: column;
-            align-items: center;
-            gap: 2.5rem;
-          }
-
-          /* Photo first on mobile */
+          .hero-root { padding-top: 6rem; padding-bottom: 5rem; align-items: flex-start; }
+          .hero-main { flex-direction: column; align-items: center; gap: 2.5rem; }
           .hero-image-col { order: -1; }
-
           .hero-image-wrap { width: 160px; height: 210px; }
-
-          /* Re-center the float tag on mobile since there's no left offset room */
-          .hero-float-tag {
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: -0.75rem;
-          }
-
-          .hero-text { width: 100%; }
-
-          .hero-h1 { font-size: clamp(2.75rem, 13vw, 4rem); }
-
-          .hero-desc { font-size: 0.9rem; }
-
-          .hero-stats { gap: 1.5rem; }
+          .hero-float-tag { left: 50%; transform: translateX(-50%); bottom: -0.75rem; }
+          .hero-text { width: 100%; text-align: center; }
+          .hero-eyebrow { margin-left: auto; margin-right: auto; }
+          .hero-location { display: flex; justify-content: center; }
+          .hero-desc { margin-left: auto; margin-right: auto; font-size: 0.9rem; }
+          .hero-actions { justify-content: center; }
+          .hero-socials-wrap { display: flex; justify-content: center; }
+          .hero-stats { gap: 1.5rem; justify-content: center; }
           .hero-stat-num { font-size: 1.4rem; }
-
-          /* Hide scroll indicator on mobile — not enough room */
           .hero-divider { display: none; }
         }
       `}</style>
@@ -480,7 +453,6 @@ const Hero: React.FC = () => {
 
         <div className="hero-content">
           <div className="hero-main">
-            {/* TEXT */}
             <div className="hero-text">
               <div className="hero-eyebrow">
                 <span className="hero-eyebrow-dot" />
@@ -490,7 +462,7 @@ const Hero: React.FC = () => {
               <h1 className="hero-h1">
                 Fullstack
                 <br />
-                <span className="accent">Web3 Dev</span>
+                <span className="accent">Developer</span>
               </h1>
 
               <div className="hero-location">
@@ -511,9 +483,6 @@ const Hero: React.FC = () => {
                   </svg>
                   <span>Hire Me</span>
                 </button>
-                {/* <a id="projects" className="btn-ghost">
-                  View Work
-                </a> */}
               </div>
 
               <div className="hero-socials-wrap">
@@ -542,7 +511,6 @@ const Hero: React.FC = () => {
               </div>
             </div>
 
-            {/* IMAGE — order: -1 on mobile puts this first */}
             <div className="hero-image-col">
               <div className="hero-image-wrap">
                 <div className="hero-bracket" />
