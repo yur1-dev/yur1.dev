@@ -13,6 +13,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://www.yur1.xyz/sitemap.xml",
+    sitemap: "https://yur1.xyz/sitemap.xml",
   };
 }
